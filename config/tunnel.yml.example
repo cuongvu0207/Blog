@@ -1,0 +1,10 @@
+# Sao chép thành tunnel.yml sau khi chạy setup-domain.bat
+# Thay TUNNEL_UUID và đường dẫn credentials-file cho đúng
+
+tunnel: TUNNEL_UUID
+credentials-file: C:\Users\pc\Desktop\personal-blog\config\TUNNEL_UUID.json
+
+ingress:
+  - hostname: blog.ctech.vn
+    service: http://127.0.0.1:8080
+  - service: http_status:404

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập Admin — CTECH</title>
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/favicon.svg?v=2">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script src="../js/theme-bootstrap.js"></script>
+</head>
+<body class="admin-body admin-login-page" data-base="../" data-page="admin-login">
+  <main class="admin-login">
+    <div class="admin-login-card">
+      <div class="admin-login-lang">
+        <select id="lang-select" class="lang-select"></select>
+      </div>
+      <h1 data-i18n="admin.login.title">Đăng nhập Quản trị</h1>
+      <p data-i18n="admin.login.desc">Nhập mật khẩu để truy cập bảng quản trị CTECH</p>
+      <form id="login-form" autocomplete="off">
+        <label>
+          <span class="i18n-label" data-i18n="admin.login.password">Mật khẩu</span>
+          <input type="password" id="login-password" autocomplete="off" required>
+        </label>
+        <p class="login-error hidden" id="login-error" data-i18n="admin.login.error">Mật khẩu không đúng</p>
+        <button type="submit" class="btn-primary" data-i18n="admin.login.submit">Đăng nhập</button>
+      </form>
+      <a href="forgot-password.html" class="admin-login-back" data-i18n="admin.forgot.link">Quên mật khẩu?</a>
+      <a href="../index.html" class="admin-login-back" data-i18n="admin.backToSite">← Về website</a>
+    </div>
+  </main>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    (async () => {
+      await I18n.init();
+      if (AdminAuth.getPassword()) {
+        window.location.href = 'index.html';
+        return;
+      }
+      document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const password = document.getElementById('login-password').value.trim();
+        const errEl = document.getElementById('login-error');
+        errEl.classList.add('hidden');
+        const result = await AdminAuth.login(password);
+        if (result.ok) {
+          window.location.href = 'index.html';
+        } else {
+          errEl.textContent = result.error || I18n.t('admin.login.error');
+          errEl.classList.remove('hidden');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

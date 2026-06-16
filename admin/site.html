@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cài đặt Website — CTECH Admin</title>
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/favicon.svg?v=2">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script src="../js/theme-bootstrap.js"></script>
+</head>
+<body class="admin-body" data-base="../">
+  <header class="admin-header">
+    <h1 data-i18n="admin.site">Cài đặt Website</h1>
+    <div class="admin-header-actions">
+      <button type="button" id="btn-admin-logout" class="admin-logout-btn" data-i18n="admin.logout">Đăng xuất</button>
+      <select id="lang-select" class="lang-select"></select>
+      <nav class="admin-nav">
+        <a href="index.html" data-i18n="admin.dashboard">Tổng quan</a>
+        <a href="posts.html" data-i18n="admin.posts">Quản lý đánh giá</a>
+
+        <a href="site.html" class="active" data-i18n="admin.site">Cài đặt Website</a>
+        <a href="security.html" data-i18n="admin.security.nav">Bảo mật</a>
+        <a href="../index.html" data-i18n="admin.backToSite">← Về website</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main admin-main-wide">
+    <p class="admin-page-desc" data-i18n="admin.siteDesc">Thông tin website, profile, cửa hàng</p>
+
+    <form id="site-form" class="admin-site-form">
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.site.section.profile">Hồ sơ cá nhân</h2>
+        <div class="form-section">
+          <div class="form-section-title">🇻🇳 Tiếng Việt</div>
+          <label data-i18n="admin.site.field.name">Họ tên<input type="text" id="profile-name"></label>
+          <label data-i18n="admin.site.field.jobTitle">Chức danh<input type="text" id="profile-title"></label>
+          <label data-i18n="admin.site.field.bio">Giới thiệu ngắn<textarea id="profile-bio" rows="2"></textarea></label>
+          <label data-i18n="admin.site.field.location">Địa điểm<input type="text" id="profile-location"></label>
+        </div>
+        <div class="form-section">
+          <div class="form-section-title">🇬🇧 English</div>
+          <label data-i18n="admin.site.field.nameEn">Họ tên (EN)<input type="text" id="profile-name-en"></label>
+          <label data-i18n="admin.site.field.jobTitleEn">Chức danh (EN)<input type="text" id="profile-title-en"></label>
+          <label data-i18n="admin.site.field.bioEn">Giới thiệu (EN)<textarea id="profile-bio-en" rows="2"></textarea></label>
+          <label data-i18n="admin.site.field.locationEn">Địa điểm (EN)<input type="text" id="profile-location-en"></label>
+        </div>
+        <label data-i18n="admin.site.field.email">Email<input type="email" id="profile-email"></label>
+        <label data-i18n="admin.field.image">Ảnh đại diện
+          <div class="image-input-row">
+            <input type="text" id="profile-avatar">
+            <button type="button" class="btn-secondary" id="btn-upload-avatar" data-i18n="admin.upload">Upload</button>
+            <input type="file" id="profile-avatar-file" accept="image/*" class="hidden">
+          </div>
+          <img src="" alt="" id="profile-avatar-preview" class="image-preview hidden">
+        </label>
+        <label data-i18n="admin.site.field.cover">Ảnh bìa
+          <div class="image-input-row">
+            <input type="text" id="profile-cover">
+            <button type="button" class="btn-secondary" id="btn-upload-cover" data-i18n="admin.upload">Upload</button>
+            <input type="file" id="profile-cover-file" accept="image/*" class="hidden">
+          </div>
+          <img src="" alt="" id="profile-cover-preview" class="image-preview hidden">
+        </label>
+        <div class="form-row">
+          <label data-i18n="admin.site.field.github">GitHub<input type="url" id="social-github"></label>
+          <label data-i18n="admin.site.field.linkedin">LinkedIn<input type="url" id="social-linkedin"></label>
+          <label data-i18n="admin.site.field.facebook">Facebook<input type="url" id="social-facebook"></label>
+        </div>
+      </section>
+
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.site.section.site">Thông tin website</h2>
+        <div class="form-section">
+          <div class="form-section-title">🇻🇳 Tiếng Việt</div>
+          <label data-i18n="admin.site.field.siteTitle">Tên website<input type="text" id="site-title"></label>
+          <label data-i18n="admin.site.field.siteTagline">Tagline<textarea id="site-tagline" rows="2"></textarea></label>
+          <label data-i18n="admin.site.field.footer">Footer<textarea id="site-footer" rows="2"></textarea></label>
+        </div>
+        <div class="form-section">
+          <div class="form-section-title">🇬🇧 English</div>
+          <label data-i18n="admin.site.field.siteTitleEn">Tên website (EN)<input type="text" id="site-title-en"></label>
+          <label data-i18n="admin.site.field.siteTaglineEn">Tagline (EN)<textarea id="site-tagline-en" rows="2"></textarea></label>
+          <label data-i18n="admin.site.field.footerEn">Footer (EN)<textarea id="site-footer-en" rows="2"></textarea></label>
+        </div>
+        <label data-i18n="admin.site.field.theme">Giao diện mặc định<select id="site-theme"></select></label>
+      </section>
+
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.site.section.blog">Blog đánh giá</h2>
+        <div class="form-section">
+          <div class="form-section-title">🇻🇳 Tiếng Việt</div>
+          <label data-i18n="admin.site.field.blogTagline">Mô tả trang đánh giá<textarea id="blog-tagline" rows="2"></textarea></label>
+        </div>
+        <div class="form-section">
+          <div class="form-section-title">🇬🇧 English</div>
+          <label data-i18n="admin.site.field.blogTaglineEn">Mô tả (EN)<textarea id="blog-tagline-en" rows="2"></textarea></label>
+        </div>
+      </section>
+
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.site.section.contact">Liên hệ &amp; bong bóng chat</h2>
+        <div class="form-row">
+          <label data-i18n="admin.site.field.phone">Số điện thoại<input type="tel" id="contact-phone"></label>
+          <label data-i18n="admin.site.field.zalo">Zalo<input type="tel" id="contact-zalo"></label>
+        </div>
+        <div class="form-row">
+          <label data-i18n="admin.site.field.telegram">Telegram<input type="text" id="contact-telegram" placeholder="@username"></label>
+          <label data-i18n="admin.site.field.messenger">Messenger<input type="text" id="contact-messenger" placeholder="https://m.me/..."></label>
+        </div>
+        <label data-i18n="admin.site.field.whatsapp">WhatsApp<input type="tel" id="contact-whatsapp" placeholder="84901234567"></label>
+      </section>
+
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.site.section.about">Giới thiệu</h2>
+        <div class="form-section">
+          <div class="form-section-title">🇻🇳 Tiếng Việt</div>
+          <label data-i18n="admin.site.field.aboutHeading">Tiêu đề<textarea id="about-heading" rows="1"></textarea></label>
+          <label data-i18n="admin.site.field.paragraphs">Nội dung (mỗi đoạn cách nhau 1 dòng trống)<textarea id="about-paragraphs" rows="5"></textarea></label>
+        </div>
+        <div class="form-section">
+          <div class="form-section-title">🇬🇧 English</div>
+          <label data-i18n="admin.site.field.aboutHeadingEn">Tiêu đề (EN)<textarea id="about-heading-en" rows="1"></textarea></label>
+          <label data-i18n="admin.site.field.paragraphsEn">Nội dung (EN)<textarea id="about-paragraphs-en" rows="5"></textarea></label>
+        </div>
+        <label data-i18n="admin.site.field.aboutImage">Ảnh giới thiệu
+          <div class="image-input-row">
+            <input type="text" id="about-image">
+            <button type="button" class="btn-secondary" id="btn-upload-about" data-i18n="admin.upload">Upload</button>
+            <input type="file" id="about-image-file" accept="image/*" class="hidden">
+          </div>
+          <img src="" alt="" id="about-image-preview" class="image-preview hidden">
+        </label>
+      </section>
+
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.site.section.services">Dịch vụ &amp; Lĩnh vực</h2>
+        <div id="services-list"></div>
+        <button type="button" class="btn-secondary" id="btn-add-service" data-i18n="admin.site.addService">+ Thêm dịch vụ</button>
+      </section>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn-primary" data-i18n="admin.save">Lưu tất cả</button>
+      </div>
+    </form>
+  </main>
+
+  <div class="toast hidden" id="toast"></div>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/core.js"></script>
+  <script src="../js/admin-site.js"></script>
+</body>
+</html>

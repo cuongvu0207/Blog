@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Đánh giá — CTECH</title>
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.svg?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-bootstrap.js"></script>
+</head>
+<body data-page="post">
+  <div class="scroll-progress" id="scroll-progress"></div>
+  <div class="bg-effects" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <div class="toolbar" id="toolbar">
+    <div class="toolbar-right">
+      <label class="theme-label" data-i18n="toolbar.theme">Giao diện</label>
+      <select id="theme-select" class="theme-select"></select>
+      <label class="theme-label" data-i18n="toolbar.lang">Ngôn ngữ</label>
+      <select id="lang-select" class="lang-select"></select>
+      <div id="user-toolbar" class="user-toolbar"></div>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="logo">
+      <span class="logo-mark" aria-hidden="true">C</span>
+      <span class="logo-text" data-field="site.title">CTECH</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link" data-i18n="nav.home">Trang chủ</a></li>
+      <li><a href="index.html#about" class="nav-link" data-i18n="nav.about">Giới thiệu</a></li>
+      <li><a href="posts.html" class="nav-link active" data-i18n="nav.blog">Đánh giá</a></li>
+      <li><a href="index.html#contact" class="nav-link" data-i18n="nav.contact">Liên hệ</a></li>
+    </ul>
+  </nav>
+
+  <main class="post-detail-main post-detail-main-top">
+    <article class="post-detail reveal" id="post-detail"></article>
+    <section class="comments-section reveal" id="comments-section" hidden></section>
+  </main>
+
+  <footer class="footer">
+    <p data-field="site.footer">© 2026 Blog Cá Nhân</p>
+    <p class="footer-tagline" data-field="site.tagline">Tagline</p>
+  </footer>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="js/modal.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/user-auth.js"></script>
+  <script src="js/contact-bubble.js"></script>
+  <script src="js/comments.js"></script>
+  <script src="js/post-detail.js"></script>
+</body>
+</html>

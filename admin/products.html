@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý Cửa hàng — CTECH Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script src="../js/theme-bootstrap.js"></script>
+</head>
+<body class="admin-body" data-base="../">
+  <header class="admin-header">
+    <h1 data-i18n="admin.products">Quản lý Cửa hàng</h1>
+    <div class="admin-header-actions">
+      <button type="button" id="btn-admin-logout" class="admin-logout-btn" data-i18n="admin.logout">Đăng xuất</button>
+      <select id="lang-select" class="lang-select"></select>
+      <nav class="admin-nav">
+        <a href="index.html" data-i18n="admin.dashboard">Tổng quan</a>
+        <a href="posts.html" data-i18n="admin.posts">Quản lý Blog</a>
+        <a href="products.html" class="active" data-i18n="admin.products">Quản lý Cửa hàng</a>
+        <a href="site.html" data-i18n="admin.site">Cài đặt Website</a>
+        <a href="security.html" data-i18n="admin.security.nav">Bảo mật</a>
+        <a href="../index.html" data-i18n="admin.backToSite">← Về website</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-toolbar">
+      <p data-i18n="admin.productsDesc">Thêm, sửa, xóa sản phẩm cửa hàng</p>
+      <button class="btn-primary" id="btn-add-product" data-i18n="admin.addProduct">+ Thêm sản phẩm</button>
+    </div>
+    <div id="admin-products-list"></div>
+  </main>
+
+  <div class="modal hidden" id="edit-product-modal">
+    <div class="modal-backdrop" id="edit-product-backdrop"></div>
+    <div class="modal-content edit-form" style="max-width:800px">
+      <h3 id="edit-product-title">Chỉnh sửa sản phẩm</h3>
+      <div class="form-section">
+        <div class="form-section-title">🇻🇳 Tiếng Việt</div>
+        <label data-i18n="admin.field.name">Tên sản phẩm<input type="text" id="edit-product-name"></label>
+        <label data-i18n="admin.field.desc">Mô tả<textarea id="edit-product-desc" rows="3"></textarea></label>
+        <label data-i18n="admin.field.specs">Thông số<textarea id="edit-product-specs" rows="4"></textarea></label>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">🇬🇧 English</div>
+        <label data-i18n="admin.field.nameEn">Tên (EN)<input type="text" id="edit-product-name-en"></label>
+        <label data-i18n="admin.field.descEn">Mô tả (EN)<textarea id="edit-product-desc-en" rows="3"></textarea></label>
+        <label>Specs (EN)<textarea id="edit-product-specs-en" rows="4"></textarea></label>
+      </div>
+      <label data-i18n="admin.field.category">Danh mục<input type="text" id="edit-product-category"></label>
+      <label data-i18n="admin.field.price">Giá gốc<input type="number" id="edit-product-price"></label>
+      <label data-i18n="admin.field.salePrice">Giá KM<input type="number" id="edit-product-sale"></label>
+      <label data-i18n="admin.field.image">Ảnh
+        <div class="image-input-row">
+          <input type="text" id="edit-product-image">
+          <button type="button" class="btn-secondary" id="btn-upload-product-image" data-i18n="admin.upload">Upload</button>
+          <input type="file" id="edit-product-image-file" accept="image/*" class="hidden">
+        </div>
+        <img src="" alt="" id="edit-product-image-preview" class="image-preview hidden">
+      </label>
+      <label><input type="checkbox" id="edit-product-stock" checked> <span data-i18n="admin.field.inStock">Còn hàng</span></label>
+      <label><input type="checkbox" id="edit-product-featured"> <span data-i18n="admin.field.featured">Nổi bật</span></label>
+      <div class="edit-actions">
+        <button class="btn-danger hidden" id="btn-delete-product" data-i18n="admin.delete">Xóa</button>
+        <button class="btn-secondary" id="btn-cancel-edit-product" data-i18n="admin.cancel">Hủy</button>
+        <button class="btn-primary" id="btn-confirm-edit-product" data-i18n="admin.save">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+  <script src="../js/modal.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/core.js"></script>
+  <script src="../js/admin-core.js"></script>
+  <script src="../js/admin-products.js"></script>
+</body>
+</html>

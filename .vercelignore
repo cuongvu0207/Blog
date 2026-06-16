@@ -1,0 +1,23 @@
+# Python server & local stuff
+server.py
+*.bat
+tools/
+__pycache__/
+*.pyc
+config/
+tunnel.yml*
+
+# Secrets & private data (never deploy)
+users.json
+config.json
+uploads/
+*.log
+
+# Public blog content is OK to deploy
+# data.json is intentionally allowed for the live site
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

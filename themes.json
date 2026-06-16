@@ -1,0 +1,87 @@
+{
+  "ocean": {
+    "name": "Đại Dương",
+    "colors": {
+      "bg": "#0f172a",
+      "bgCard": "#1e293b",
+      "bgHover": "#334155",
+      "text": "#f1f5f9",
+      "textMuted": "#94a3b8",
+      "primary": "#38bdf8",
+      "primaryHover": "#0ea5e9",
+      "accent": "#818cf8",
+      "border": "#334155",
+      "gradient": "linear-gradient(135deg, #0ea5e9 0%, #818cf8 100%)"
+    },
+    "font": "'Be Vietnam Pro', sans-serif",
+    "radius": "12px"
+  },
+  "forest": {
+    "name": "Rừng Xanh",
+    "colors": {
+      "bg": "#0c1f0c",
+      "bgCard": "#1a2e1a",
+      "bgHover": "#2d4a2d",
+      "text": "#ecfdf5",
+      "textMuted": "#86efac",
+      "primary": "#4ade80",
+      "primaryHover": "#22c55e",
+      "accent": "#a3e635",
+      "border": "#2d4a2d",
+      "gradient": "linear-gradient(135deg, #22c55e 0%, #a3e635 100%)"
+    },
+    "font": "'Be Vietnam Pro', sans-serif",
+    "radius": "8px"
+  },
+  "sunset": {
+    "name": "Hoàng Hôn",
+    "colors": {
+      "bg": "#1a0a0a",
+      "bgCard": "#2d1515",
+      "bgHover": "#4a2020",
+      "text": "#fef2f2",
+      "textMuted": "#fca5a5",
+      "primary": "#fb923c",
+      "primaryHover": "#f97316",
+      "accent": "#f472b6",
+      "border": "#4a2020",
+      "gradient": "linear-gradient(135deg, #f97316 0%, #f472b6 100%)"
+    },
+    "font": "'Be Vietnam Pro', sans-serif",
+    "radius": "16px"
+  },
+  "minimal": {
+    "name": "Tối Giản",
+    "colors": {
+      "bg": "#fafafa",
+      "bgCard": "#ffffff",
+      "bgHover": "#f4f4f5",
+      "text": "#18181b",
+      "textMuted": "#71717a",
+      "primary": "#2563eb",
+      "primaryHover": "#1d4ed8",
+      "accent": "#71717a",
+      "border": "#e4e4e7",
+      "gradient": "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)"
+    },
+    "font": "'Be Vietnam Pro', sans-serif",
+    "radius": "6px"
+  },
+  "lavender": {
+    "name": "Oải Hương",
+    "colors": {
+      "bg": "#1a1025",
+      "bgCard": "#2d1f3d",
+      "bgHover": "#3d2a52",
+      "text": "#f5f3ff",
+      "textMuted": "#c4b5fd",
+      "primary": "#a78bfa",
+      "primaryHover": "#8b5cf6",
+      "accent": "#e879f9",
+      "border": "#3d2a52",
+      "gradient": "linear-gradient(135deg, #8b5cf6 0%, #e879f9 100%)"
+    },
+    "font": "'Be Vietnam Pro', sans-serif",
+    "radius": "20px"
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý đánh giá — CTECH Admin</title>
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/favicon.svg?v=2">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script src="../js/theme-bootstrap.js"></script>
+</head>
+<body class="admin-body" data-base="../">
+  <header class="admin-header">
+    <h1 data-i18n="admin.posts">Quản lý đánh giá</h1>
+    <div class="admin-header-actions">
+      <button type="button" id="btn-admin-logout" class="admin-logout-btn" data-i18n="admin.logout">Đăng xuất</button>
+      <select id="lang-select" class="lang-select"></select>
+      <nav class="admin-nav">
+        <a href="index.html" data-i18n="admin.dashboard">Tổng quan</a>
+        <a href="posts.html" class="active" data-i18n="admin.posts">Quản lý đánh giá</a>
+        <a href="site.html" data-i18n="admin.site">Cài đặt Website</a>
+        <a href="security.html" data-i18n="admin.security.nav">Bảo mật</a>
+        <a href="../index.html" data-i18n="admin.backToSite">← Về website</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-toolbar">
+      <p data-i18n="admin.postsDesc">Thêm, sửa, xóa bài đánh giá công nghệ</p>
+      <button class="btn-primary" id="btn-add-post" data-i18n="admin.addPost">+ Thêm bài đánh giá</button>
+    </div>
+    <div id="admin-posts-list"></div>
+  </main>
+
+  <div class="modal hidden" id="edit-post-modal">
+    <div class="modal-backdrop" id="edit-modal-backdrop"></div>
+    <div class="modal-content edit-form" style="max-width:800px">
+      <h3 id="edit-post-title">Chỉnh sửa bài viết</h3>
+      <div class="form-section">
+        <div class="form-section-title">🇻🇳 Tiếng Việt</div>
+        <label data-i18n="admin.field.reviewTarget">Sản phẩm / công nghệ đánh giá<input type="text" id="edit-review-target"></label>
+        <label data-i18n="admin.field.title">Tiêu đề<input type="text" id="edit-title"></label>
+        <label data-i18n="admin.field.excerpt">Mô tả ngắn<textarea id="edit-excerpt" rows="2"></textarea></label>
+        <label data-i18n="admin.field.content">Nội dung đánh giá<textarea id="edit-content" rows="6"></textarea></label>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">🇬🇧 English</div>
+        <label data-i18n="admin.field.reviewTargetEn">Sản phẩm (EN)<input type="text" id="edit-review-target-en"></label>
+        <label data-i18n="admin.field.titleEn">Tiêu đề (EN)<input type="text" id="edit-title-en"></label>
+        <label data-i18n="admin.field.excerptEn">Mô tả ngắn (EN)<textarea id="edit-excerpt-en" rows="2"></textarea></label>
+        <label data-i18n="admin.field.contentEn">Nội dung (EN)<textarea id="edit-content-en" rows="6"></textarea></label>
+      </div>
+      <div class="form-row">
+        <label data-i18n="admin.field.rating">Điểm đánh giá (0–10)<input type="number" id="edit-rating" min="0" max="10" step="0.1" placeholder="8.5"></label>
+        <label data-i18n="admin.field.date">Ngày<input type="date" id="edit-date"></label>
+      </div>
+      <label data-i18n="admin.field.image">Ảnh
+        <div class="image-input-row">
+          <input type="text" id="edit-image">
+          <button type="button" class="btn-secondary" id="btn-upload-post-image" data-i18n="admin.upload">Upload</button>
+          <input type="file" id="edit-image-file" accept="image/*" class="hidden">
+        </div>
+        <img src="" alt="" id="edit-image-preview" class="image-preview hidden">
+      </label>
+      <label data-i18n="admin.field.tags">Tags<input type="text" id="edit-tags"></label>
+      <div class="edit-actions">
+        <button class="btn-danger hidden" id="btn-delete-post" data-i18n="admin.delete">Xóa</button>
+        <button class="btn-secondary" id="btn-cancel-edit-post" data-i18n="admin.cancel">Hủy</button>
+        <button class="btn-primary" id="btn-confirm-edit-post" data-i18n="admin.save">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="comments-modal">
+    <div class="modal-backdrop" id="comments-modal-backdrop"></div>
+    <div class="modal-content" style="max-width:640px">
+      <h3 id="comments-modal-title">Bình luận</h3>
+      <div id="admin-comments-list" class="admin-comments-list"></div>
+      <div class="edit-actions">
+        <button type="button" class="btn-secondary" id="btn-close-comments" data-i18n="admin.cancel">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+  <script src="../js/modal.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/core.js"></script>
+  <script src="../js/admin-core.js"></script>
+  <script src="../js/admin-posts.js"></script>
+</body>
+</html>

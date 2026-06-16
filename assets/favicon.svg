@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="CTECH">
+  <defs>
+    <linearGradient id="ctech-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0ea5e9" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="32" height="32" rx="9" fill="url(#ctech-grad)" filter="url(#glow)"/>
+  <text x="16" y="22" font-family="Segoe UI, system-ui, sans-serif" font-size="17" font-weight="800" fill="#ffffff" text-anchor="middle">C</text>
+</svg>

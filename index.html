@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>CTECH — Đánh giá Công nghệ</title>
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.svg?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-bootstrap.js"></script>
+</head>
+<body>
+  <div id="static-banner" style="display:none; background:#1e293b; color:#bae6fd; font-size:13px; padding:8px 12px; text-align:center; border-bottom:1px solid #334155;">
+    📌 Đây là phiên bản tĩnh trên Vercel (public demo). 
+    Để chỉnh sửa bài, quản lý admin, bình luận &amp; upload đầy đủ → chạy local: <b>start.bat</b> (http://localhost:8080)
+    <a href="#" onclick="document.getElementById('static-banner').style.display='none';return false;" style="margin-left:8px; color:#67e8f9;">Đã hiểu</a>
+  </div>
+  <script>
+    // Show static banner on Vercel / static hosts
+    try {
+      if (location.hostname.includes('vercel.app') || location.hostname.includes('vercel.com')) {
+        var b = document.getElementById('static-banner');
+        if (b) b.style.display = 'block';
+      }
+    } catch(e){}
+  </script>
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <div class="bg-effects" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <div class="toolbar" id="toolbar">
+    <div class="toolbar-right">
+      <label class="theme-label" data-i18n="toolbar.theme">Giao diện</label>
+      <select id="theme-select" class="theme-select"></select>
+      <label class="theme-label" data-i18n="toolbar.lang">Ngôn ngữ</label>
+      <select id="lang-select" class="lang-select"></select>
+      <div id="user-toolbar" class="user-toolbar"></div>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="logo">
+      <span class="logo-mark" aria-hidden="true">C</span>
+      <span class="logo-text" data-field="site.title">CTECH</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active" data-i18n="nav.home">Trang chủ</a></li>
+      <li><a href="#about" class="nav-link" data-i18n="nav.about">Giới thiệu</a></li>
+      <li><a href="posts.html" class="nav-link" data-i18n="nav.blog">Đánh giá</a></li>
+      <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Liên hệ</a></li>
+    </ul>
+  </nav>
+
+  <header class="header">
+    <div class="hero-cover" id="hero-cover"></div>
+    <div class="hero" id="home">
+      <div class="hero-avatar reveal-up" id="avatar-wrapper">
+        <div class="avatar-ring"></div>
+        <img src="" alt="Avatar" id="avatar">
+      </div>
+      <h1 class="hero-name reveal-up" data-field="profile.name">Tên của bạn</h1>
+      <p class="hero-title reveal-up" data-field="profile.title">Chức danh</p>
+      <p class="hero-bio reveal-up" data-field="profile.bio">Giới thiệu ngắn</p>
+      <div class="hero-social reveal-up" id="social-links"></div>
+      <div class="hero-cta reveal-up">
+        <a href="posts.html" class="cta-primary">📖 <span data-i18n="hero.cta.blog">Đọc đánh giá công nghệ</span></a>
+      </div>
+      <a href="#about" class="scroll-indicator" aria-label="Cuộn xuống">
+        <span class="scroll-dot"></span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section reveal" id="about">
+      <h2 class="section-title" data-field="about.heading">Về tôi</h2>
+      <div class="about-layout">
+        <div class="about-photo-wrap reveal-left" id="about-photo-wrap">
+          <img src="" alt="Ảnh cá nhân" id="about-photo" class="about-photo">
+          <div class="photo-shine"></div>
+        </div>
+        <div class="about-text reveal-right">
+          <div class="about-content" id="about-paragraphs"></div>
+        </div>
+      </div>
+      <h3 class="services-heading reveal-up" data-i18n="section.services">Lĩnh vực &amp; Dịch vụ</h3>
+      <div class="services" id="services"></div>
+    </section>
+
+    <section class="section reveal" id="posts-preview-section">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="section.latestBlog">Đánh giá mới nhất</h2>
+        <a href="posts.html" class="btn-view-all" data-i18n="section.viewAllPosts">Xem tất cả bài đánh giá →</a>
+      </div>
+      <p class="section-desc" data-field="blog.tagline">Đánh giá khách quan về thiết bị và công nghệ</p>
+      <div class="posts-grid posts-grid-preview" id="posts-preview"></div>
+    </section>
+
+    <section class="section reveal" id="contact">
+      <h2 class="section-title" data-i18n="section.contact">Liên hệ</h2>
+      <div class="contact-info">
+        <div class="contact-item reveal-scale">
+          <span class="contact-icon">📧</span>
+          <span data-field="profile.email">email@example.com</span>
+        </div>
+        <div class="contact-item reveal-scale">
+          <span class="contact-icon">📍</span>
+          <span data-field="profile.location">Địa điểm</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p data-field="site.footer">© 2026 Blog Cá Nhân</p>
+    <p class="footer-tagline" data-field="site.tagline">Tagline</p>
+  </footer>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="js/modal.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/user-auth.js"></script>
+  <script src="js/contact-bubble.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

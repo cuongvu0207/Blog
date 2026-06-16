@@ -1,0 +1,40 @@
+# Secrets & private runtime data (never commit)
+users.json
+config.json
+domain.json
+
+# Personal uploads
+# We include the initial demo images so the site works out-of-the-box after clone.
+# New uploads created locally will be gitignored if you add them later, or you can keep them out.
+# uploads/   (commented to include the 2 demo jpgs for now)
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Vercel local
+.vercel/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Future / optional
+node_modules/
+venv/
+.env
+*.log
+
+# Cloudflared binary (large, local only)
+tools/cloudflared.exe
+
+# Keep the start scripts committed — they are useful for anyone cloning the project
+# (the *.bat files are intentionally NOT ignored)

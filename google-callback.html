@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập Google — CTECH</title>
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-bootstrap.js"></script>
+</head>
+<body class="auth-page">
+  <main class="auth-card" style="text-align:center">
+    <p data-i18n="user.google.loading">Đang hoàn tất đăng nhập Google...</p>
+  </main>
+  <script src="js/i18n.js"></script>
+  <script src="js/user-auth.js"></script>
+  <script>
+    (async () => {
+      await I18n.init();
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+      if (!token) {
+        window.location.href = 'account.html?error=google_failed';
+        return;
+      }
+      localStorage.setItem('ctech-user-token', token);
+      try {
+        const res = await fetch('api/user/me', { headers: { 'X-User-Token': token } });
+        const result = await res.json();
+        if (!res.ok || !result.ok) throw new Error('me_failed');
+        localStorage.setItem('ctech-user', JSON.stringify(result.user));
+        window.location.replace('write.html');
+      } catch {
+        localStorage.removeItem('ctech-user-token');
+        window.location.href = 'account.html?error=google_failed';
+      }
+    })();
+  </script>
+</body>
+</html>

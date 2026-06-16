@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảo mật — CTECH Admin</title>
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/favicon.svg?v=2">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script src="../js/theme-bootstrap.js"></script>
+</head>
+<body class="admin-body" data-base="../">
+  <header class="admin-header">
+    <h1 data-i18n="admin.security.title">Bảo mật</h1>
+    <div class="admin-header-actions">
+      <button type="button" id="btn-admin-logout" class="admin-logout-btn" data-i18n="admin.logout">Đăng xuất</button>
+      <select id="lang-select" class="lang-select"></select>
+      <nav class="admin-nav">
+        <a href="index.html" data-i18n="admin.dashboard">Tổng quan</a>
+        <a href="posts.html" data-i18n="admin.posts">Quản lý đánh giá</a>
+        <a href="site.html" data-i18n="admin.site">Cài đặt Website</a>
+        <a href="security.html" class="active" data-i18n="admin.security.nav">Bảo mật</a>
+        <a href="../index.html" data-i18n="admin.backToSite">← Về website</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main admin-main-wide">
+    <p class="admin-page-desc" data-i18n="admin.security.desc">Đổi mật khẩu quản trị và cấu hình khôi phục qua Gmail</p>
+
+    <form id="change-password-form" class="admin-site-form">
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.security.changeTitle">Đổi mật khẩu quản trị</h2>
+        <label data-i18n="admin.security.current">Mật khẩu hiện tại
+          <input type="password" id="current-password" autocomplete="current-password" required>
+        </label>
+        <label data-i18n="admin.security.new">Mật khẩu mới
+          <input type="password" id="new-password" autocomplete="new-password" required>
+        </label>
+        <label data-i18n="admin.security.confirm">Xác nhận mật khẩu mới
+          <input type="password" id="confirm-password" autocomplete="new-password" required>
+        </label>
+        <p class="login-error hidden" id="change-error"></p>
+        <div class="admin-form-actions">
+          <button type="submit" class="btn-primary" data-i18n="admin.security.submit">Lưu mật khẩu mới</button>
+        </div>
+      </section>
+
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.security.googleTitle">Đăng nhập Google (thành viên)</h2>
+        <p class="admin-login-hint">
+          <strong data-i18n="admin.security.googleHintTitle">Chỉ cần Client ID</strong>
+          <span data-i18n="admin.security.googleHint">Tạo OAuth Client trên Google Cloud, copy Client ID vào đây. Authorized JavaScript origins: http://localhost:8080 và link blog public.</span>
+        </p>
+        <label data-i18n="admin.security.googleClientId">Google Client ID
+          <input type="text" id="google-client-id" placeholder="xxxxx.apps.googleusercontent.com" autocomplete="off">
+        </label>
+        <p class="login-error hidden" id="google-oauth-error"></p>
+        <div class="admin-form-actions">
+          <button type="button" class="btn-primary" id="btn-save-google-oauth" data-i18n="admin.security.googleSave">Lưu Client ID</button>
+          <button type="button" class="btn-secondary" id="btn-open-google-console" data-i18n="admin.security.googleOpen">Mở Google Cloud</button>
+        </div>
+      </section>
+
+      <section class="admin-form-block">
+        <h2 data-i18n="admin.security.recoveryTitle">Khôi phục qua Gmail</h2>
+        <p class="admin-login-hint">
+          <strong data-i18n="admin.security.recoveryHintTitle">Cấu hình gửi mã qua Gmail</strong>
+          <span data-i18n="admin.security.recoveryHint">Chỉnh file config.json: ownerEmail (Gmail chủ blog) và smtp.appPassword (Mật khẩu ứng dụng Gmail). Trang quên mật khẩu sẽ gửi mã 6 số tới email này.</span>
+        </p>
+        <a href="forgot-password.html" class="btn-secondary" data-i18n="admin.forgot.link">Quên mật khẩu?</a>
+      </section>
+    </form>
+  </main>
+
+  <div class="toast hidden" id="toast"></div>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/core.js"></script>
+  <script>
+    (async () => {
+      await AdminAuth.requireAuth();
+      await BlogCore.initAdmin();
+      AdminAuth.bindLogout();
+
+      const form = document.getElementById('change-password-form');
+      const errEl = document.getElementById('change-error');
+
+      const googleInput = document.getElementById('google-client-id');
+      const googleErr = document.getElementById('google-oauth-error');
+      try {
+        const res = await fetch('../api/auth/google/status');
+        const status = await res.json();
+        if (status.clientId) googleInput.value = status.clientId;
+      } catch { /* ignore */ }
+
+      document.getElementById('btn-open-google-console')?.addEventListener('click', () => {
+        window.open('https://console.cloud.google.com/apis/credentials/oauthclient', '_blank');
+      });
+
+      document.getElementById('btn-save-google-oauth')?.addEventListener('click', async () => {
+        googleErr.classList.add('hidden');
+        const clientId = googleInput.value.trim();
+        try {
+          const res = await fetch('../api/admin/google-oauth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', ...AdminAuth.authHeaders() },
+            body: JSON.stringify({ clientId })
+          });
+          const result = await res.json();
+          if (!res.ok || !result.ok) throw new Error(result.error || I18n.t('admin.security.googleError'));
+          BlogCore.showToast(result.message || I18n.t('admin.security.googleSaved'), 'success');
+        } catch (ex) {
+          googleErr.textContent = ex.message;
+          googleErr.classList.remove('hidden');
+        }
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errEl.classList.add('hidden');
+        const currentPassword = document.getElementById('current-password').value;
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        if (newPassword !== confirmPassword) {
+          errEl.textContent = I18n.t('admin.security.confirmMismatch');
+          errEl.classList.remove('hidden');
+          return;
+        }
+        const result = await AdminAuth.changePassword(currentPassword, newPassword, confirmPassword);
+        if (result.ok) {
+          AdminAuth.setPassword(newPassword);
+          form.reset();
+          BlogCore.showToast(result.message || I18n.t('admin.security.success'), 'success');
+        } else {
+          errEl.textContent = result.error || I18n.t('admin.security.error');
+          errEl.classList.remove('hidden');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

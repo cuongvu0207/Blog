@@ -1,0 +1,471 @@
+{
+  "profile": {
+    "name": {
+      "vi": "Vu Xuan Cuong",
+      "en": "Vu Xuan Cuong",
+      "zh": "Vu Xuan Cuong",
+      "fr": "Vu Xuan Cuong",
+      "ru": "Vu Xuan Cuong",
+      "ko": "Vu Xuan Cuong",
+      "ja": "Vu Xuan Cuong"
+    },
+    "title": {
+      "vi": "Lập trình viên và Chuyên viên tư vấn giải pháp",
+      "en": "Developer & Solution Consultant",
+      "zh": "Developer & Solution Consultant",
+      "fr": "Developer & Solution Consultant",
+      "ru": "Developer & Solution Consultant",
+      "ko": "Developer & Solution Consultant",
+      "ja": "Developer & Solution Consultant"
+    },
+    "bio": {
+      "vi": "Chia sẻ đánh giá khách quan về thiết bị, phần mềm và xu hướng công nghệ.",
+      "en": "Sharing honest reviews of devices, software, and tech trends.",
+      "zh": "Sharing honest reviews of devices, software, and tech trends.",
+      "fr": "Sharing honest reviews of devices, software, and tech trends.",
+      "ru": "Sharing honest reviews of devices, software, and tech trends.",
+      "ko": "Sharing honest reviews of devices, software, and tech trends.",
+      "ja": "Sharing honest reviews of devices, software, and tech trends."
+    },
+    "email": "cuongvx@gmail.com",
+    "location": {
+      "vi": "Hà Nội, Việt Nam",
+      "en": "Hanoi, Vietnam",
+      "zh": "Hanoi, Vietnam",
+      "fr": "Hanoi, Vietnam",
+      "ru": "Hanoi, Vietnam",
+      "ko": "Hanoi, Vietnam",
+      "ja": "Hanoi, Vietnam"
+    },
+    "avatar": "/uploads/5f2026a663014b8895301b6f0ba888ee.jpg",
+    "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=600&fit=crop",
+    "social": {
+      "github": "https://github.com",
+      "linkedin": "https://linkedin.com",
+      "facebook": "https://facebook.com"
+    }
+  },
+  "site": {
+    "title": {
+      "vi": "CTECH",
+      "en": "CTECH",
+      "zh": "CTECH",
+      "fr": "CTECH",
+      "ru": "CTECH",
+      "ko": "CTECH",
+      "ja": "CTECH"
+    },
+    "tagline": {
+      "vi": "Blog đánh giá công nghệ — khách quan & chi tiết",
+      "en": "Tech review blog — honest & detailed",
+      "zh": "Tech review blog — honest & detailed",
+      "fr": "Tech review blog — honest & detailed",
+      "ru": "Tech review blog — honest & detailed",
+      "ko": "Tech review blog — honest & detailed",
+      "ja": "Tech review blog — honest & detailed"
+    },
+    "footer": {
+      "vi": "© 2026 CTECH — Blog đánh giá công nghệ",
+      "en": "© 2026 CTECH — Tech Review Blog",
+      "zh": "© 2026 CTECH — Tech Review Blog",
+      "fr": "© 2026 CTECH — Tech Review Blog",
+      "ru": "© 2026 CTECH — Tech Review Blog",
+      "ko": "© 2026 CTECH — Tech Review Blog",
+      "ja": "© 2026 CTECH — Tech Review Blog"
+    }
+  },
+  "contact": {
+    "phone": "0901234567",
+    "zalo": "0901234567",
+    "telegram": "ctechvn",
+    "messenger": "",
+    "whatsapp": ""
+  },
+  "theme": "ocean",
+  "posts": [
+    {
+      "id": "post-2d638fba7e8f",
+      "title": {
+        "vi": "Test Review",
+        "en": "Test Review",
+        "zh": "Test Review",
+        "fr": "Test Review",
+        "ru": "Test Review",
+        "ko": "Test Review",
+        "ja": "Test Review"
+      },
+      "excerpt": {
+        "vi": "Noi dung danh gia test",
+        "en": "Noi dung danh gia test",
+        "zh": "Noi dung danh gia test",
+        "fr": "Noi dung danh gia test",
+        "ru": "Noi dung danh gia test",
+        "ko": "Noi dung danh gia test",
+        "ja": "Noi dung danh gia test"
+      },
+      "content": {
+        "vi": "Noi dung danh gia test",
+        "en": "Noi dung danh gia test",
+        "zh": "Noi dung danh gia test",
+        "fr": "Noi dung danh gia test",
+        "ru": "Noi dung danh gia test",
+        "ko": "Noi dung danh gia test",
+        "ja": "Noi dung danh gia test"
+      },
+      "reviewTarget": {
+        "vi": "iPhone 16",
+        "en": "iPhone 16",
+        "zh": "iPhone 16",
+        "fr": "iPhone 16",
+        "ru": "iPhone 16",
+        "ko": "iPhone 16",
+        "ja": "iPhone 16"
+      },
+      "image": "",
+      "date": "2026-06-10",
+      "tags": [],
+      "rating": 9.0,
+      "published": true,
+      "comments": [],
+      "authorId": "user-c519e0ae0362",
+      "authorName": "Test User"
+    },
+    {
+      "id": "post-1",
+      "title": {
+        "vi": "Bắt đầu hành trình viết blog",
+        "en": "Starting my blogging journey",
+        "zh": "开始我的博客之旅",
+        "fr": "Commencer mon blog",
+        "ru": "Начало моего блога",
+        "ko": "블로깅 여정 시작",
+        "ja": "ブログの旅を始める"
+      },
+      "excerpt": {
+        "vi": "Tại sao tôi quyết định viết blog và những điều tôi hy vọng chia sẻ.",
+        "en": "Why I decided to blog and what I hope to share.",
+        "zh": "我为什么决定写博客以及希望分享的内容。",
+        "fr": "Pourquoi jai décidé de bloguer et ce que jespère partager.",
+        "ru": "Почему я решил вести блог и чем хочу поделиться.",
+        "ko": "블로그를 시작한 이유와 공유하고 싶은 것.",
+        "ja": "ブログを始めた理由と共有したいこと。"
+      },
+      "content": {
+        "vi": "Viết blog là cách tuyệt vời để ghi lại hành trình học hỏi của bạn. Mỗi bài viết là một mảnh ghép trong bức tranh lớn hơn về con người bạn.\n\nHãy bắt đầu với những chủ đề bạn đam mê, viết thường xuyên và đừng ngại chia sẻ những sai lầm — chúng thường là bài học quý giá nhất.",
+        "en": "Blogging is a great way to document your learning journey. Each post is a piece of a bigger picture of who you are.\n\nStart with topics you love, write consistently, and don't be afraid to share mistakes — they're often the most valuable lessons.",
+        "zh": "写博客是记录学习历程的绝佳方式。每篇文章都是你更大图景的一部分。\n\n从你热爱的话题开始，坚持写作，不要害怕分享错误——它们往往是最宝贵的教训。",
+        "fr": "Bloguer est un excellent moyen de documenter votre parcours dapprentissage.\n\nCommencez par vos passions, écrivez régulièrement et nayez pas peur de partager vos erreurs.",
+        "ru": "Блог — отличный способ документировать обучение.\n\nНачните с любимых тем, пишите регулярно и не бойтесь делиться ошибками.",
+        "ko": "블로깅은 학습 여정을 기록하는 좋은 방법입니다.\n\n좋아하는 주제부터 시작하고, 꾸준히 쓰며, 실수를 공유하는 것을 두려워하지 마세요.",
+        "ja": "ブログは学習の旅を記録する素晴らしい方法です。\n\n好きなトピックから始め、継続的に書き、失敗を恐れずに共有しましょう。"
+      },
+      "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=500&fit=crop",
+      "date": "2026-06-01",
+      "tags": [
+        "blog",
+        "life"
+      ],
+      "published": true,
+      "comments": []
+    },
+    {
+      "id": "post-2",
+      "title": {
+        "vi": "5 công cụ giúp tăng năng suất",
+        "en": "5 tools to boost productivity",
+        "zh": "5个提升效率的工具",
+        "fr": "5 outils pour booster la productivité",
+        "ru": "5 инструментов для продуктивности",
+        "ko": "생산성을 높이는 5가지 도구",
+        "ja": "生産性を高める5つのツール"
+      },
+      "excerpt": {
+        "vi": "Những ứng dụng và thói quen nhỏ nhưng tạo ra sự khác biệt lớn.",
+        "en": "Small apps and habits that make a big difference.",
+        "zh": "小而美的应用和习惯，带来巨大改变。",
+        "fr": "Petites apps et habitudes qui font une grande différence.",
+        "ru": "Небольшие приложения и привычки, которые меняют всё.",
+        "ko": "큰 변화를 만드는 작은 앱과 습관.",
+        "ja": "大きな違いを生む小さなアプリと習慣。"
+      },
+      "content": {
+        "vi": "Năng suất không phải là làm nhiều hơn — mà là làm đúng việc quan trọng.\n\n1. Pomodoro Technique\n2. Notion hoặc Obsidian\n3. Tắt thông báo khi deep work\n4. Lên kế hoạch từ tối hôm trước\n5. Review tuần vào cuối tuần",
+        "en": "Productivity isn't about doing more — it's about doing what matters.\n\n1. Pomodoro Technique\n2. Notion or Obsidian\n3. Turn off notifications during deep work\n4. Plan your day the night before\n5. Weekly review on weekends",
+        "zh": "生产力不是做更多——而是做重要的事情。\n\n1. 番茄工作法\n2. Notion 或 Obsidian\n3. 深度工作时关闭通知\n4. 前一晚计划第二天\n5. 周末复盘",
+        "fr": "La productivité, ce nest pas en faire plus — cest faire ce qui compte.\n\n1. Technique Pomodoro\n2. Notion ou Obsidian\n3. Désactiver les notifications\n4. Planifier la veille\n5. Revue hebdomadaire",
+        "ru": "Продуктивность — не делать больше, а делать важное.\n\n1. Pomodoro\n2. Notion или Obsidian\n3. Отключить уведомления\n4. Планировать с вечера\n5. Еженедельный обзор",
+        "ko": "생산성은 더 많이 하는 것이 아니라 중요한 일을 하는 것입니다.\n\n1. 포모도로\n2. Notion 또는 Obsidian\n3. 알림 끄기\n4. 전날 밤 계획\n5. 주간 리뷰",
+        "ja": "生産性とは量ではなく、重要なことをすること。\n\n1. ポモドーロ\n2. NotionまたはObsidian\n3. 通知オフ\n4. 前夜に計画\n5. 週次レビュー"
+      },
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop",
+      "date": "2026-05-20",
+      "tags": [
+        "productivity",
+        "tech"
+      ],
+      "published": true,
+      "comments": [],
+      "reviewTarget": {
+        "vi": "Notion, Obsidian & Pomodoro",
+        "en": "Notion, Obsidian & Pomodoro",
+        "zh": "Notion, Obsidian & Pomodoro",
+        "fr": "Notion, Obsidian & Pomodoro",
+        "ru": "Notion, Obsidian & Pomodoro",
+        "ko": "Notion, Obsidian & Pomodoro",
+        "ja": "Notion, Obsidian & Pomodoro"
+      },
+      "rating": 8.5
+    },
+    {
+      "id": "post-3",
+      "title": {
+        "vi": "Học lập trình từ con số 0",
+        "en": "Learning to code from scratch",
+        "zh": "从零开始学习编程",
+        "fr": "Apprendre à coder depuis zéro",
+        "ru": "Изучение программирования с нуля",
+        "ko": "처음부터 코딩 배우기",
+        "ja": "ゼロからプログラミングを学ぶ"
+      },
+      "excerpt": {
+        "vi": "Lộ trình và lời khuyên cho người mới bắt đầu trong năm 2026.",
+        "en": "Roadmap and advice for beginners in 2026.",
+        "zh": "2026年初学者的路线图和建议。",
+        "fr": "Feuille de route et conseils pour débutants en 2026.",
+        "ru": "Дорожная карта и советы для новичков в 2026.",
+        "ko": "2026년 초보자를 위한 로드맵과 조언.",
+        "ja": "2026年初心者向けロードマップとアドバイス。"
+      },
+      "content": {
+        "vi": "Bắt đầu với Python hoặc JavaScript. Thực hành mỗi ngày, dù chỉ 30 phút.\n\nĐừng nhảy qua nhiều khóa học — hãy xây dựng dự án nhỏ. Portfolio thực tế luôn thuyết phục hơn chứng chỉ.",
+        "en": "Start with Python or JavaScript. Practice daily, even just 30 minutes.\n\nDon't jump between courses — build small projects. A real portfolio beats certificates.",
+        "zh": "从 Python 或 JavaScript 开始。每天练习，哪怕只有30分钟。\n\n不要在课程之间跳来跳去——做小型项目。真实作品集胜过证书。",
+        "fr": "Commencez avec Python ou JavaScript. Pratiquez chaque jour, même 30 minutes.\n\nConstruisez de petits projets. Un portfolio réel vaut mieux que des certificats.",
+        "ru": "Начните с Python или JavaScript. Практикуйтесь ежедневно, хотя бы 30 минут.\n\nСоздавайте небольшие проекты. Портфолио важнее сертификатов.",
+        "ko": "Python 또는 JavaScript로 시작하세요. 매일 30분이라도 연습하세요.\n\n작은 프로젝트를 만드세요. 포트폴리오가 자격증보다 낫습니다.",
+        "ja": "PythonまたはJavaScriptから始めましょう。毎日30分でも練習を。\n\n小さなプロジェクトを作りましょう。ポートフォリオは資格より説得力があります。"
+      },
+      "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=500&fit=crop",
+      "date": "2026-05-10",
+      "tags": [
+        "coding",
+        "learning"
+      ],
+      "published": true,
+      "comments": []
+    }
+  ],
+  "services": [
+    {
+      "icon": "💻",
+      "name": {
+        "vi": "Lập trình",
+        "en": "Programming",
+        "zh": "编程开发",
+        "fr": "Programmation",
+        "ru": "Программирование",
+        "ko": "프로그래밍",
+        "ja": "プログラミング"
+      },
+      "desc": {
+        "vi": "Phát triển web, mobile, API & phần mềm theo yêu cầu",
+        "en": "Custom web, mobile, API & software development",
+        "zh": "定制Web、移动、API和软件开发",
+        "fr": "Développement web, mobile, API et logiciels sur mesure",
+        "ru": "Разработка web, mobile, API и ПО под заказ",
+        "ko": "맞춤형 웹, 모바일, API 및 소프트웨어 개발",
+        "ja": "Web・モバイル・API・ソフトウェアの受託開発"
+      }
+    },
+    {
+      "icon": "🧩",
+      "name": {
+        "vi": "Tư vấn giải pháp",
+        "en": "Solution Consulting",
+        "zh": "解决方案咨询",
+        "fr": "Conseil en solutions",
+        "ru": "Консалтинг решений",
+        "ko": "솔루션 컨설팅",
+        "ja": "ソリューションコンサルティング"
+      },
+      "desc": {
+        "vi": "Phân tích nhu cầu, lộ trình & công nghệ phù hợp doanh nghiệp",
+        "en": "Needs analysis, roadmaps & tech fit for your business",
+        "zh": "需求分析、路线图与企业技术选型",
+        "fr": "Analyse des besoins, feuille de route et choix technologiques",
+        "ru": "Анализ потребностей, дорожные карты и подбор технологий",
+        "ko": "요구 분석, 로드맵 및 기업 맞춤 기술 제안",
+        "ja": "ニーズ分析・ロードマップ・最適技術の提案"
+      }
+    },
+    {
+      "icon": "🔄",
+      "name": {
+        "vi": "Chuyển đổi số",
+        "en": "Digital Transformation",
+        "zh": "数字化转型",
+        "fr": "Transformation numérique",
+        "ru": "Цифровая трансформация",
+        "ko": "디지털 전환",
+        "ja": "デジタルトランスフォーメーション"
+      },
+      "desc": {
+        "vi": "Số hóa quy trình, tự động hóa & nâng cao hiệu quả vận hành",
+        "en": "Process digitization, automation & operational efficiency",
+        "zh": "流程数字化、自动化与运营效率提升",
+        "fr": "Digitalisation des processus, automatisation et efficacité",
+        "ru": "Оцифровка процессов, автоматизация и эффективность",
+        "ko": "프로세스 디지털화, 자동화 및 운영 효율 향상",
+        "ja": "プロセスのデジタル化・自動化・業務効率化"
+      }
+    },
+    {
+      "icon": "☁️",
+      "name": {
+        "vi": "Cloud & Hạ tầng",
+        "en": "Cloud & Infrastructure",
+        "zh": "云与基础设施",
+        "fr": "Cloud & infrastructure",
+        "ru": "Облако и инфраструктура",
+        "ko": "클라우드 & 인프라",
+        "ja": "クラウド & インフラ"
+      },
+      "desc": {
+        "vi": "Triển khai cloud, server, DevOps & giám sát hệ thống",
+        "en": "Cloud deployment, servers, DevOps & system monitoring",
+        "zh": "云部署、服务器、DevOps与系统监控",
+        "fr": "Déploiement cloud, serveurs, DevOps et supervision",
+        "ru": "Облако, серверы, DevOps и мониторинг систем",
+        "ko": "클라우드 배포, 서버, DevOps 및 시스템 모니터링",
+        "ja": "クラウド展開・サーバー・DevOps・監視"
+      }
+    },
+    {
+      "icon": "🔗",
+      "name": {
+        "vi": "Tích hợp hệ thống",
+        "en": "System Integration",
+        "zh": "系统集成",
+        "fr": "Intégration systèmes",
+        "ru": "Интеграция систем",
+        "ko": "시스템 통합",
+        "ja": "システム統合"
+      },
+      "desc": {
+        "vi": "Kết nối ERP, CRM, API & đồng bộ dữ liệu đa nền tảng",
+        "en": "ERP, CRM, API integration & cross-platform data sync",
+        "zh": "ERP、CRM、API集成与跨平台数据同步",
+        "fr": "Intégration ERP, CRM, API et synchronisation des données",
+        "ru": "Интеграция ERP, CRM, API и синхронизация данных",
+        "ko": "ERP, CRM, API 연동 및 크로스 플랫폼 데이터 동기화",
+        "ja": "ERP・CRM・API連携とデータ同期"
+      }
+    },
+    {
+      "icon": "🛡️",
+      "name": {
+        "vi": "Bảo mật CNTT",
+        "en": "IT Security",
+        "zh": "信息安全",
+        "fr": "Sécurité informatique",
+        "ru": "ИТ-безопасность",
+        "ko": "IT 보안",
+        "ja": "ITセキュリティ"
+      },
+      "desc": {
+        "vi": "An toàn thông tin, phòng chống rủi ro & tuân thủ quy định",
+        "en": "Information security, risk prevention & compliance",
+        "zh": "信息安全、风险防控与合规",
+        "fr": "Sécurité de l'information, prévention des risques et conformité",
+        "ru": "Информационная безопасность, риски и соответствие нормам",
+        "ko": "정보보안, 리스크 예방 및 규정 준수",
+        "ja": "情報セキュリティ・リスク対策・コンプライアンス"
+      }
+    },
+    {
+      "icon": "📊",
+      "name": {
+        "vi": "Phân tích dữ liệu",
+        "en": "Data Analytics",
+        "zh": "数据分析",
+        "fr": "Analyse de données",
+        "ru": "Аналитика данных",
+        "ko": "데이터 분석",
+        "ja": "データ分析"
+      },
+      "desc": {
+        "vi": "BI, dashboard, báo cáo thông minh & hỗ trợ ra quyết định",
+        "en": "BI, dashboards, smart reports & decision support",
+        "zh": "商业智能、仪表板、智能报表与决策支持",
+        "fr": "BI, tableaux de bord, rapports intelligents et aide à la décision",
+        "ru": "BI, дашборды, отчёты и поддержка решений",
+        "ko": "BI, 대시보드, 스마트 리포트 및 의사결정 지원",
+        "ja": "BI・ダッシュボード・レポート・意思決定支援"
+      }
+    },
+    {
+      "icon": "🎓",
+      "name": {
+        "vi": "Đào tạo & Hỗ trợ",
+        "en": "Training & Support",
+        "zh": "培训与支持",
+        "fr": "Formation & support",
+        "ru": "Обучение и поддержка",
+        "ko": "교육 & 지원",
+        "ja": "トレーニング & サポート"
+      },
+      "desc": {
+        "vi": "Đào tạo kỹ năng số, hướng dẫn vận hành & hỗ trợ kỹ thuật",
+        "en": "Digital skills training, ops guidance & technical support",
+        "zh": "数字技能培训、运营指导与技术支持",
+        "fr": "Formation aux compétences numériques, accompagnement et support technique",
+        "ru": "Обучение цифровым навыкам, сопровождение и техподдержка",
+        "ko": "디지털 역량 교육, 운영 가이드 및 기술 지원",
+        "ja": "デジタルスキル研修・運用支援・技術サポート"
+      }
+    }
+  ],
+  "about": {
+    "heading": {
+      "vi": "Về CTECH",
+      "en": "About CTECH",
+      "zh": "About CTECH",
+      "fr": "About CTECH",
+      "ru": "About CTECH",
+      "ko": "About CTECH",
+      "ja": "About CTECH"
+    },
+    "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=700&fit=crop",
+    "paragraphs": [
+      {
+        "vi": "CTECH là nơi tôi chia sẻ kiến thức công nghệ qua blog và cung cấp thiết bị tech chất lượng.",
+        "en": "CTECH is where I share tech knowledge through blogging and provide quality tech devices.",
+        "zh": "CTECH is where I share tech knowledge through blogging and provide quality tech devices.",
+        "fr": "CTECH is where I share tech knowledge through blogging and provide quality tech devices.",
+        "ru": "CTECH is where I share tech knowledge through blogging and provide quality tech devices.",
+        "ko": "CTECH is where I share tech knowledge through blogging and provide quality tech devices.",
+        "ja": "CTECH is where I share tech knowledge through blogging and provide quality tech devices."
+      },
+      {
+        "vi": "Tôi tuyển chọn từng sản phẩm dựa trên trải nghiệm thực tế.",
+        "en": "I select each product based on real-world experience.",
+        "zh": "I select each product based on real-world experience.",
+        "fr": "I select each product based on real-world experience.",
+        "ru": "I select each product based on real-world experience.",
+        "ko": "I select each product based on real-world experience.",
+        "ja": "I select each product based on real-world experience."
+      }
+    ]
+  },
+  "blog": {
+    "tagline": {
+      "vi": "Đánh giá khách quan về thiết bị, phần mềm và xu hướng công nghệ",
+      "en": "Honest reviews of devices, software, and tech trends",
+      "zh": "Honest reviews of devices, software, and tech trends",
+      "fr": "Honest reviews of devices, software, and tech trends",
+      "ru": "Honest reviews of devices, software, and tech trends",
+      "ko": "Honest reviews of devices, software, and tech trends",
+      "ja": "Honest reviews of devices, software, and tech trends"
+    }
+  }
+}
