@@ -1,3 +1,6 @@
 # No external dependencies needed for the core server
 # pymongo for MongoDB Atlas
 pymongo
+
+# Cloudinary for persistent image uploads (recommended for Render)
+cloudinary

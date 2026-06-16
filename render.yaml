@@ -10,12 +10,15 @@ services:
     envVars:
       - key: HOST
         value: 0.0.0.0
-      # Add other env if needed, e.g. for email in future
-      # Set MONGO_URI in Render Dashboard (with /ctech at end) for MongoDB Atlas
+      # MongoDB Atlas (required for persistent data)
+      # Set MONGO_URI in Render Dashboard (with /ctech at end)
       # Example: mongodb+srv://ctech:ctech2026@cluster0.brg7fgq.mongodb.net/ctech?retryWrites=true&w=majority&appName=Cluster0
-    # For persistence of uploads/data.json on free plan: not guaranteed (ephemeral FS)
-    # For production, upgrade to paid + add Disk
-    # disk:
-    #   name: data-disk
-    #   mountPath: /data
-    #   sizeGB: 1
+      #
+      # Cloudinary for image uploads (recommended - replaces local /uploads/ which is ephemeral on Render)
+      # Create free account at https://cloudinary.com → Dashboard → get these 3 values
+      - key: CLOUDINARY_CLOUD_NAME
+        value: your_cloud_name_here
+      - key: CLOUDINARY_API_KEY
+        value: your_api_key_here
+      - key: CLOUDINARY_API_SECRET
+        value: your_api_secret_here

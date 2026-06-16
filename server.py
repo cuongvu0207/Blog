@@ -17,6 +17,8 @@ from urllib.parse import quote, urlencode, urlparse, parse_qs
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 from pymongo import MongoClient
+import cloudinary
+import cloudinary.uploader
 
 PORT = int(os.environ.get("PORT", 8080))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -47,6 +49,22 @@ if MONGO_URI:
         print(f"  MongoDB connection failed: {e}. Falling back to file storage.")
 else:
     print("  No MONGO_URI. Using file storage. Set MONGO_URI env var on Render with your Atlas connection string (mongodb+srv://...).")
+
+# Cloudinary configuration for image uploads (persistent, recommended for Render)
+CLOUDINARY_CLOUD_NAME = os.environ.get("CLOUDINARY_CLOUD_NAME")
+CLOUDINARY_API_KEY = os.environ.get("CLOUDINARY_API_KEY")
+CLOUDINARY_API_SECRET = os.environ.get("CLOUDINARY_API_SECRET")
+
+if CLOUDINARY_CLOUD_NAME and CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET:
+    cloudinary.config(
+        cloud_name=CLOUDINARY_CLOUD_NAME,
+        api_key=CLOUDINARY_API_KEY,
+        api_secret=CLOUDINARY_API_SECRET,
+        secure=True
+    )
+    print("  Cloudinary configured – uploads will go to Cloudinary (persistent)")
+else:
+    print("  No Cloudinary credentials found. Uploads will fall back to local filesystem (ephemeral on Render).")
 
 
 def default_config():
@@ -765,8 +783,30 @@ class BlogHandler(SimpleHTTPRequestHandler):
                 self._json_response(400, {"ok": False, "error": f"File type {ext} not allowed"})
                 return
 
-            os.makedirs(UPLOAD_DIR, exist_ok=True)
             safe_name = f"{uuid.uuid4().hex}{ext}"
+
+            # Prefer Cloudinary for persistent storage (especially on Render)
+            if CLOUDINARY_CLOUD_NAME and CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET:
+                try:
+                    upload_result = cloudinary.uploader.upload(
+                        file_data,
+                        folder="ctech-blog",
+                        public_id=safe_name.rsplit(".", 1)[0],
+                        resource_type="image",
+                        overwrite=False
+                    )
+                    url = upload_result.get("secure_url")
+                    if url:
+                        self._json_response(200, {"ok": True, "url": url})
+                        return
+                    else:
+                        raise Exception("Cloudinary did not return secure_url")
+                except Exception as e:
+                    print(f"Cloudinary upload failed: {e}. Falling back to local storage.")
+                    # fall through to local fallback
+
+            # Fallback: local filesystem (for local dev or if no Cloudinary)
+            os.makedirs(UPLOAD_DIR, exist_ok=True)
             save_path = os.path.join(UPLOAD_DIR, safe_name)
 
             with open(save_path, "wb") as f:
