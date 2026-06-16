@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: ctech-blog-api
+    env: python
+    region: oregon  # or frankfurt, etc.
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      # Add other env if needed, e.g. for email in future
+    # For persistence of uploads/data.json on free plan: not guaranteed (ephemeral FS)
+    # For production, upgrade to paid + add Disk
+    # disk:
+    #   name: data-disk
+    #   mountPath: /data
+    #   sizeGB: 1

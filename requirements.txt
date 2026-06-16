@@ -1,0 +1,3 @@
+# No external dependencies needed for the core server
+# If using additional features (e.g. xlsx import in future), add here
+# e.g. openpyxl>=3.0.0
