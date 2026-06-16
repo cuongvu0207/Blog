@@ -20,7 +20,8 @@ async function uploadImage(e) {
   formData.append('file', file);
   try {
     const base = document.body.dataset.base || '';
-    const res = await fetch(`${base}api/upload`, {
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+    const res = await fetch(`${apiBase}${base}api/upload`, {
       method: 'POST',
       headers: UserAuth.authHeaders(),
       body: formData
@@ -50,7 +51,8 @@ async function submitPost(e) {
       tags: document.getElementById('write-tags').value.trim(),
       image: document.getElementById('write-image').value.trim()
     };
-    const res = await fetch(`${base}api/user/post`, {
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+    const res = await fetch(`${apiBase}${base}api/user/post`, {
       method: 'POST',
       headers: { ...UserAuth.authHeaders(), 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)

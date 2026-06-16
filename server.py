@@ -17,7 +17,7 @@ from urllib.parse import quote, urlencode, urlparse, parse_qs
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
-PORT = 8080
+PORT = int(os.environ.get("PORT", 8080))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
@@ -668,6 +668,11 @@ class BlogHandler(SimpleHTTPRequestHandler):
                 f.write(file_data)
 
             url = f"/uploads/{safe_name}"
+            # For cross-origin (Vercel frontend + Render backend), return absolute URL
+            host = self.headers.get('Host', '')
+            if host:
+                scheme = 'https' if 'onrender' in host.lower() or self.headers.get('X-Forwarded-Proto') == 'https' else 'http'
+                url = f"{scheme}://{host}/uploads/{safe_name}"
             self._json_response(200, {"ok": True, "url": url})
         except Exception as e:
             self._json_response(500, {"ok": False, "error": str(e)})

@@ -32,7 +32,8 @@ const UserAuth = (() => {
 
   async function register(payload) {
     const base = document.body?.dataset?.base || '';
-    const res = await fetch(`${base}api/user/register`, {
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+    const res = await fetch(`${apiBase}${base}api/user/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -47,7 +48,8 @@ const UserAuth = (() => {
 
   async function login(username, password) {
     const base = document.body?.dataset?.base || '';
-    const res = await fetch(`${base}api/user/login`, {
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+    const res = await fetch(`${apiBase}${base}api/user/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
@@ -62,7 +64,8 @@ const UserAuth = (() => {
 
   async function loginWithGoogleCredential(credential) {
     const base = document.body?.dataset?.base || '';
-    const res = await fetch(`${base}api/auth/google/credential`, {
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+    const res = await fetch(`${apiBase}${base}api/auth/google/credential`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ credential })
@@ -77,8 +80,9 @@ const UserAuth = (() => {
 
   async function logout() {
     const base = document.body?.dataset?.base || '';
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
     try {
-      await fetch(`${base}api/user/logout`, {
+      await fetch(`${apiBase}${base}api/user/logout`, {
         method: 'POST',
         headers: authHeaders()
       });
@@ -93,7 +97,8 @@ const UserAuth = (() => {
     if (!token) return null;
     const base = document.body?.dataset?.base || '';
     try {
-      const res = await fetch(`${base}api/user/me`, { headers: authHeaders() });
+      const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+      const res = await fetch(`${apiBase}${base}api/user/me`, { headers: authHeaders() });
       const result = await res.json();
       if (!res.ok || !result.ok) {
         clear();
@@ -125,7 +130,8 @@ const UserAuth = (() => {
   async function googleEnabled() {
     const base = document.body?.dataset?.base || '';
     try {
-      const res = await fetch(`${base}api/auth/google/status`);
+      const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+      const res = await fetch(`${apiBase}${base}api/auth/google/status`);
       const result = await res.json();
       if (result.ok && result.enabled) {
         googleClientId = result.clientId || '';
@@ -174,7 +180,8 @@ const UserAuth = (() => {
       return;
     }
     const base = document.body?.dataset?.base || '';
-    window.location.href = `${base}api/auth/google`;
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+    window.location.href = `${apiBase}${base}api/auth/google`;
   }
 
   function renderToolbar() {

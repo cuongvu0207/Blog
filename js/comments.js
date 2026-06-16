@@ -2,7 +2,8 @@ const Comments = (() => {
   async function submit(postId, name, content) {
     const base = document.body.dataset.base || '';
     const headers = { 'Content-Type': 'application/json', ...(typeof UserAuth !== 'undefined' ? UserAuth.authHeaders() : {}) };
-    const res = await fetch(`${base}api/comment`, {
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
+    const res = await fetch(`${apiBase}${base}api/comment`, {
       method: 'POST',
       headers,
       body: JSON.stringify({ postId, name, content })

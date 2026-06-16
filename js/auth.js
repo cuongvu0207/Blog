@@ -20,8 +20,9 @@ const AdminAuth = (() => {
 
   async function login(password) {
     const base = document.body?.dataset?.base || '';
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
     try {
-      const res = await fetch(`${base}api/auth`, {
+      const res = await fetch(`${apiBase}${base}api/auth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
@@ -71,9 +72,10 @@ const AdminAuth = (() => {
 
   async function apiPost(path, body, withAuth = false) {
     const base = document.body?.dataset?.base || '';
+    const apiBase = (typeof window !== 'undefined' && window.API_BASE) || '';
     const headers = { 'Content-Type': 'application/json', ...(withAuth ? authHeaders() : {}) };
     try {
-      const res = await fetch(`${base}${path}`, {
+      const res = await fetch(`${apiBase}${base}${path}`, {
         method: 'POST',
         headers,
         body: JSON.stringify(body)

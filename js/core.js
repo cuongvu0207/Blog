@@ -5,6 +5,9 @@ const BlogCore = (() => {
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => document.querySelectorAll(sel);
 
+  const getBase = () => document.body?.dataset?.base || '';
+  const getApiBase = () => (typeof window !== 'undefined' && window.API_BASE) || '';
+
   function getPreferredTheme() {
     const saved = localStorage.getItem(THEME_KEY);
     return saved && themes[saved] ? saved : null;
@@ -49,12 +52,14 @@ const BlogCore = (() => {
   }
 
   async function loadData() {
-    const base = document.body.dataset.base || '';
+    const base = getBase();
+    const apiBase = getApiBase();
+    const dataBase = apiBase || base;
     const bust = Date.now();
     const fetchOpts = { cache: 'no-store' };
     const [dataRes, themesRes] = await Promise.all([
-      fetch(`${base}data.json?_=${bust}`, fetchOpts),
-      fetch(`${base}themes.json?_=${bust}`, fetchOpts)
+      fetch(`${dataBase}data.json?_=${bust}`, fetchOpts),
+      fetch(`${dataBase}themes.json?_=${bust}`, fetchOpts)
     ]);
     if (!dataRes.ok) throw new Error(`data.json HTTP ${dataRes.status}`);
     if (!themesRes.ok) throw new Error(`themes.json HTTP ${themesRes.status}`);
@@ -155,10 +160,11 @@ const BlogCore = (() => {
   }
 
   async function uploadImage(file) {
-    const base = document.body.dataset.base || '';
+    const base = getBase();
+    const apiBase = getApiBase();
     const formData = new FormData();
     formData.append('file', file);
-    const res = await fetch(`${base}api/upload`, { method: 'POST', headers: apiHeaders(), body: formData });
+    const res = await fetch(`${apiBase}${base}api/upload`, { method: 'POST', headers: apiHeaders(), body: formData });
     if (res.status === 401) { handleUnauthorized(); throw new Error(I18n.t('admin.login.required')); }
     const result = await res.json();
     if (!result.ok) throw new Error(result.error || 'Upload failed');
@@ -166,9 +172,10 @@ const BlogCore = (() => {
   }
 
   async function saveData() {
-    const base = document.body.dataset.base || '';
+    const base = getBase();
+    const apiBase = getApiBase();
     try {
-      const res = await fetch(`${base}api/save`, {
+      const res = await fetch(`${apiBase}${base}api/save`, {
         method: 'POST',
         headers: apiHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(data, null, 2)
