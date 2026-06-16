@@ -3,10 +3,9 @@ users.json
 config.json
 domain.json
 
-# Personal uploads
-# We include the initial demo images so the site works out-of-the-box after clone.
-# New uploads created locally will be gitignored if you add them later, or you can keep them out.
-# uploads/   (commented to include the 2 demo jpgs for now)
+# Personal uploads - include the initial demo images so the site works out-of-the-box after clone.
+# For new uploads during local dev (if using server.py), they can be added to .gitignore locally or committed if you want them in the static site on Git/Vercel.
+# uploads/
 
 # Python cache
 __pycache__/
@@ -36,7 +35,5 @@ venv/
 # Cloudflared binary (large, local only)
 tools/cloudflared.exe
 
-# Keep the start scripts committed — they are useful for anyone cloning the project
+# Keep the start scripts committed - they are useful for anyone cloning the project
 # (the *.bat files are intentionally NOT ignored)
-
-.vercel
