@@ -40,7 +40,7 @@ mongo_db = None
 if MONGO_URI:
     try:
         mongo_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-        mongo_db = mongo_client.get_database("blog")  # or specify /dbname in URI
+        mongo_db = mongo_client.get_database("ctech")  # use your Atlas DB name 'ctech'
         mongo_client.admin.command('ping')
         print("  Connected to MongoDB Atlas")
     except Exception as e:
@@ -69,6 +69,7 @@ def default_config():
             "clientId": "",
             "clientSecret": "",
         },
+        "mongoUri": "",
     }
 
 
@@ -144,6 +145,9 @@ def ensure_config():
             if oauth_key not in config["googleOAuth"]:
                 config["googleOAuth"][oauth_key] = oauth_val
                 changed = True
+    if "mongoUri" not in config:
+        config["mongoUri"] = defaults.get("mongoUri", "")
+        changed = True
     if changed:
         save_config(config)
 
@@ -492,6 +496,9 @@ class BlogHandler(SimpleHTTPRequestHandler):
         if path == "/api/auth/google/callback":
             self._handle_google_callback()
             return
+        if path in ("/health", "/api/health"):
+            self._handle_health()
+            return
         super().do_GET()
 
     def do_POST(self):
@@ -521,6 +528,8 @@ class BlogHandler(SimpleHTTPRequestHandler):
             self._handle_admin_change_password()
         elif parsed.path == "/api/admin/google-oauth":
             self._handle_admin_google_oauth()
+        elif parsed.path == "/api/admin/setup-mongo":
+            self._handle_admin_setup_mongo()
         elif parsed.path == "/api/auth/google/credential":
             self._handle_google_credential()
         else:
@@ -1050,6 +1059,57 @@ class BlogHandler(SimpleHTTPRequestHandler):
             self._json_response(200, {"ok": True, "message": "Đã lưu Google Client ID"})
         except Exception as e:
             self._json_response(500, {"ok": False, "error": str(e)})
+
+    def _handle_admin_setup_mongo(self):
+        if not self._is_authorized():
+            self._json_response(401, {"ok": False, "error": "Unauthorized"})
+            return
+        length = int(self.headers.get("Content-Length", 0))
+        body = self.rfile.read(length)
+        try:
+            payload = json.loads(body.decode("utf-8"))
+            mongo_uri = (payload.get("mongoUri") or "").strip()
+            if mongo_uri and not mongo_uri.startswith("mongodb+srv://") and not mongo_uri.startswith("mongodb://"):
+                self._json_response(400, {"ok": False, "error": "MongoDB URI phải bắt đầu bằng mongodb:// hoặc mongodb+srv://"})
+                return
+            config = load_config()
+            config["mongoUri"] = mongo_uri
+            save_config(config)
+            if mongo_uri:
+                self._json_response(200, {"ok": True, "message": "Đã lưu MongoDB URI. Khởi động lại server để áp dụng."})
+            else:
+                self._json_response(200, {"ok": True, "message": "Đã xóa MongoDB URI. Server sẽ dùng file storage."})
+        except Exception as e:
+            self._json_response(500, {"ok": False, "error": str(e)})
+
+    def _handle_health(self):
+        """Healthcheck endpoint for Render / monitoring. Checks DB connectivity if using Mongo."""
+        now = datetime.now(timezone.utc).isoformat()
+        if mongo_db is not None and mongo_client is not None:
+            try:
+                mongo_client.admin.command('ping')
+                self._json_response(200, {
+                    "status": "ok",
+                    "db": "mongo",
+                    "mongo": True,
+                    "time": now
+                })
+            except Exception as e:
+                self._json_response(503, {
+                    "status": "error",
+                    "db": "mongo",
+                    "mongo": True,
+                    "error": str(e)[:200],
+                    "time": now
+                })
+            return
+        # File storage mode (no MONGO_URI)
+        self._json_response(200, {
+            "status": "ok",
+            "db": "file",
+            "mongo": False,
+            "time": now
+        })
 
     def _handle_user_post(self):
         _, user = self._get_user_from_request()

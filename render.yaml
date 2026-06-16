@@ -6,10 +6,13 @@ services:
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python server.py
+    healthCheckPath: /health
     envVars:
       - key: HOST
         value: 0.0.0.0
       # Add other env if needed, e.g. for email in future
+      # Set MONGO_URI in Render Dashboard (with /ctech at end) for MongoDB Atlas
+      # Example: mongodb+srv://ctech:ctech2026@cluster0.brg7fgq.mongodb.net/ctech?retryWrites=true&w=majority&appName=Cluster0
     # For persistence of uploads/data.json on free plan: not guaranteed (ephemeral FS)
     # For production, upgrade to paid + add Disk
     # disk:
