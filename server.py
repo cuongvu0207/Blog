@@ -1018,6 +1018,9 @@ class BlogHandler(SimpleHTTPRequestHandler):
     def _json_response(self, code, data):
         self.send_response(code)
         self.send_header("Content-Type", "application/json")
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'X-Admin-Password, Content-Type, X-User-Token')
         self.end_headers()
         self.wfile.write(json.dumps(data).encode())
 
