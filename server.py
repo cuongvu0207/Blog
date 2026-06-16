@@ -1163,6 +1163,18 @@ def main():
     print("  Không mua tên miền: start-tailscale-funnel.bat")
     print("  Nhấn Ctrl+C để dừng server")
     print("=" * 50)
+
+    # Seed data into MongoDB on startup if collections are empty
+    if mongo_db:
+        print("  Seeding MongoDB if empty...")
+        try:
+            load_site_data()  # seeds profile, posts, site, etc. if empty
+            load_users_store()  # seeds users if empty
+            load_config()  # seeds config if empty
+            print("  MongoDB seeding complete (or already had data).")
+        except Exception as e:
+            print(f"  Seeding error: {e}")
+
     try:
         server.serve_forever()
     except KeyboardInterrupt:
