@@ -1,0 +1,1 @@
+To get Mongo password: Go to Atlas dashboard  Access  New Database User (or edit existing)  password there. Then copy full connection string with password.

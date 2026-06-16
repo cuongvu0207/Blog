@@ -16,6 +16,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import quote, urlencode, urlparse, parse_qs
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
+from pymongo import MongoClient
 
 PORT = int(os.environ.get("PORT", 8080))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -32,14 +33,28 @@ MIN_ADMIN_PASSWORD_LEN = 6
 USERNAME_RE = re.compile(r"^[a-zA-Z0-9_]{3,32}$")
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
+# MongoDB setup for professional data storage (Atlas URI from env)
+MONGO_URI = os.environ.get("MONGO_URI")
+mongo_client = None
+mongo_db = None
+if MONGO_URI:
+    try:
+        mongo_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+        mongo_db = mongo_client.get_database("blog")  # or specify /dbname in URI
+        mongo_client.admin.command('ping')
+        print("  Connected to MongoDB Atlas")
+    except Exception as e:
+        print(f"  MongoDB connection failed: {e}. Falling back to file storage.")
+else:
+    print("  No MONGO_URI. Using file storage. Set MONGO_URI env var on Render with your Atlas connection string (mongodb+srv://...).")
+
 
 def default_config():
     owner_email = ""
     try:
-        if os.path.exists(DATA_PATH):
-            with open(DATA_PATH, encoding="utf-8") as f:
-                owner_email = json.load(f).get("profile", {}).get("email", "").strip()
-    except (OSError, json.JSONDecodeError):
+        site_data = load_site_data()
+        owner_email = site_data.get("profile", {}).get("email", "").strip()
+    except Exception:
         pass
     return {
         "adminPassword": DEFAULT_ADMIN_PASSWORD,
@@ -58,17 +73,42 @@ def default_config():
 
 
 def load_config():
+    if mongo_db:
+        try:
+            doc = mongo_db.config.find_one({"_id": "main"})
+            if doc:
+                config = {k: v for k, v in doc.items() if k != "_id"}
+                return config
+        except Exception as e:
+            print(f"Mongo load_config error: {e}")
     ensure_config()
     with open(CONFIG_PATH, encoding="utf-8") as f:
         return json.load(f)
 
 
 def save_config(config):
+    if mongo_db:
+        try:
+            doc = dict(config)
+            doc["_id"] = "main"
+            mongo_db.config.replace_one({"_id": "main"}, doc, upsert=True)
+            return
+        except Exception as e:
+            print(f"Mongo save_config error: {e}")
     with open(CONFIG_PATH, "w", encoding="utf-8") as f:
         json.dump(config, f, ensure_ascii=False, indent=2)
 
 
 def ensure_config():
+    if mongo_db:
+        try:
+            doc = mongo_db.config.find_one({"_id": "main"})
+            if not doc:
+                save_config(default_config())
+                print(f"  Đã tạo config in Mongo — mật khẩu mặc định: {DEFAULT_ADMIN_PASSWORD}")
+            return
+        except Exception as e:
+            print(f"Mongo ensure_config error: {e}")
     if not os.path.exists(CONFIG_PATH):
         save_config(default_config())
         print(f"  Đã tạo config.json — mật khẩu mặc định: {DEFAULT_ADMIN_PASSWORD}")
@@ -164,6 +204,18 @@ def validate_new_password(password):
 
 
 def load_users_store():
+    if mongo_db:
+        try:
+            doc = mongo_db.users.find_one({"_id": "main"})
+            if doc:
+                store = {k: v for k, v in doc.items() if k != "_id"}
+                return store
+            else:
+                store = {"users": [], "sessions": []}
+                save_users_store(store)
+                return store
+        except Exception as e:
+            print(f"Mongo load_users_store error: {e}")
     if not os.path.exists(USERS_PATH):
         store = {"users": [], "sessions": []}
         save_users_store(store)
@@ -173,6 +225,14 @@ def load_users_store():
 
 
 def save_users_store(store):
+    if mongo_db:
+        try:
+            doc = dict(store)
+            doc["_id"] = "main"
+            mongo_db.users.replace_one({"_id": "main"}, doc, upsert=True)
+            return
+        except Exception as e:
+            print(f"Mongo save_users_store error: {e}")
     with open(USERS_PATH, "w", encoding="utf-8") as f:
         json.dump(store, f, ensure_ascii=False, indent=2)
 
@@ -344,11 +404,42 @@ def remove_user_session(token):
 
 
 def load_site_data():
+    if mongo_db:
+        try:
+            doc = mongo_db.site_data.find_one({"_id": "main"})
+            if doc:
+                data = {k: v for k, v in doc.items() if k != "_id"}
+                return data
+            else:
+                # Seed from file if present (first time migration)
+                if os.path.exists(DATA_PATH):
+                    with open(DATA_PATH, encoding="utf-8") as f:
+                        seed_data = json.load(f)
+                    save_site_data(seed_data)
+                    print("  Seeded initial site data to MongoDB from data.json")
+                    return seed_data
+                # default empty
+                default_data = {
+                    "profile": {}, "site": {}, "contact": {}, "theme": "ocean",
+                    "posts": [], "services": [], "products": []
+                }
+                save_site_data(default_data)
+                return default_data
+        except Exception as e:
+            print(f"Mongo load_site_data error: {e}")
     with open(DATA_PATH, encoding="utf-8") as f:
         return json.load(f)
 
 
 def save_site_data(data):
+    if mongo_db:
+        try:
+            doc = dict(data)
+            doc["_id"] = "main"
+            mongo_db.site_data.replace_one({"_id": "main"}, doc, upsert=True)
+            return
+        except Exception as e:
+            print(f"Mongo save_site_data error: {e}")
     with open(DATA_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
@@ -605,10 +696,7 @@ class BlogHandler(SimpleHTTPRequestHandler):
 
         try:
             data = json.loads(body.decode("utf-8"))
-            filepath = os.path.join(BASE_DIR, "data.json")
-            with open(filepath, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-
+            save_site_data(data)
             self._json_response(200, {"ok": True})
         except Exception as e:
             self._json_response(500, {"ok": False, "error": str(e)})
