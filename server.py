@@ -73,7 +73,7 @@ def default_config():
 
 
 def load_config():
-    if mongo_db:
+    if mongo_db is not None:
         try:
             doc = mongo_db.config.find_one({"_id": "main"})
             if doc:
@@ -87,7 +87,7 @@ def load_config():
 
 
 def save_config(config):
-    if mongo_db:
+    if mongo_db is not None:
         try:
             doc = dict(config)
             doc["_id"] = "main"
@@ -100,7 +100,7 @@ def save_config(config):
 
 
 def ensure_config():
-    if mongo_db:
+    if mongo_db is not None:
         try:
             doc = mongo_db.config.find_one({"_id": "main"})
             if not doc:
@@ -204,7 +204,7 @@ def validate_new_password(password):
 
 
 def load_users_store():
-    if mongo_db:
+    if mongo_db is not None:
         try:
             doc = mongo_db.users.find_one({"_id": "main"})
             if doc:
@@ -225,7 +225,7 @@ def load_users_store():
 
 
 def save_users_store(store):
-    if mongo_db:
+    if mongo_db is not None:
         try:
             doc = dict(store)
             doc["_id"] = "main"
@@ -404,7 +404,7 @@ def remove_user_session(token):
 
 
 def load_site_data():
-    if mongo_db:
+    if mongo_db is not None:
         try:
             doc = mongo_db.site_data.find_one({"_id": "main"})
             if doc:
@@ -432,7 +432,7 @@ def load_site_data():
 
 
 def save_site_data(data):
-    if mongo_db:
+    if mongo_db is not None:
         try:
             doc = dict(data)
             doc["_id"] = "main"
@@ -1165,7 +1165,7 @@ def main():
     print("=" * 50)
 
     # Seed data into MongoDB on startup if collections are empty
-    if mongo_db:
+    if mongo_db is not None:
         print("  Seeding MongoDB if empty...")
         try:
             load_site_data()  # seeds profile, posts, site, etc. if empty
