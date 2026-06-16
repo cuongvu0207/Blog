@@ -52,6 +52,7 @@ const AdminCore = (() => {
     BlogCore.$('#edit-review-target-en').value = reviewTarget.en;
     BlogCore.$('#edit-image').value = post.image || '';
     BlogCore.updateImagePreview(post.image, BlogCore.$('#edit-image-preview'));
+    BlogCore.$('#edit-map-url').value = post.mapUrl || '';
     BlogCore.$('#btn-delete-post')?.classList.toggle('hidden', isNew);
     Modal.open('edit-post-modal');
   }
@@ -115,7 +116,8 @@ const AdminCore = (() => {
         image: BlogCore.$('#edit-image').value.trim(),
         date: BlogCore.$('#edit-date').value,
         tags: BlogCore.$('#edit-tags').value.split(',').map((t) => t.trim()).filter(Boolean),
-        rating: Number.isFinite(ratingVal) && ratingVal >= 0 && ratingVal <= 10 ? ratingVal : null
+        rating: Number.isFinite(ratingVal) && ratingVal >= 0 && ratingVal <= 10 ? ratingVal : null,
+        mapUrl: BlogCore.$('#edit-map-url') ? BlogCore.$('#edit-map-url').value.trim() : ''
       };
 
       const data = BlogCore.data();

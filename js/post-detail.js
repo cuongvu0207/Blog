@@ -57,6 +57,42 @@ function renderPost() {
       <div class="post-tags post-detail-tags">${(post.tags || []).map((t) => `<span class="tag">${BlogCore.escapeHtml(t)}</span>`).join('')}</div>
     </div>
     <div class="post-detail-body reveal-up">${BlogCore.escapeHtml(BlogCore.loc(post.content)).split('\n\n').map((p) => `<p>${BlogCore.escapeHtml(p).replace(/\n/g, '<br>')}</p>`).join('')}</div>
+
+    ${post.mapUrl ? (() => {
+      const isEmbed = post.mapUrl.includes('/embed') || post.mapUrl.includes('pb=');
+      if (isEmbed) {
+        return `
+          <div class="post-map reveal-up" style="margin: 2rem 0 1rem;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.6rem;">📍 Vị trí / Bản đồ</h3>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #eee;">
+              <iframe 
+                src="${BlogCore.escapeAttr(post.mapUrl)}" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 12px;"
+                allowfullscreen 
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <div style="margin-top: 0.4rem; text-align: right;">
+              <a href="${BlogCore.escapeAttr(post.mapUrl)}" target="_blank" rel="noopener" style="font-size: 0.9em; text-decoration: underline;">Mở Google Maps ↗</a>
+            </div>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="post-map reveal-up" style="margin: 2rem 0 1rem; padding: 1rem; background: #f8f8f8; border-radius: 12px; border: 1px solid #eee;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">📍 Vị trí / Bản đồ</h3>
+            <a href="${BlogCore.escapeAttr(post.mapUrl)}" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-block; padding: 0.6rem 1rem; font-size: 0.95em;">
+              Xem bản đồ trên Google Maps ↗
+            </a>
+            <div style="margin-top: 0.4rem; font-size: 0.85em; opacity: 0.7;">
+              (Để hiển thị bản đồ trực tiếp, hãy dùng link nhúng embed)
+            </div>
+          </div>
+        `;
+      }
+    })() : ''}
+
     <div class="post-detail-footer reveal-up">
       <a href="posts.html" class="btn-secondary">← ${I18n.t('post.backToList')}</a>
     </div>
