@@ -462,7 +462,7 @@ class BlogHandler(SimpleHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, X-Admin-Password, X-User-Token")
         path = urlparse(getattr(self, "path", "") or "").path
-        if path in ("/data.json", "/themes.json", "/users.json"):
+        if path in ("/data.json", "/themes.json", "/users.json", "/api/data"):
             self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
             self.send_header("Pragma", "no-cache")
             self.send_header("Expires", "0")
@@ -498,6 +498,14 @@ class BlogHandler(SimpleHTTPRequestHandler):
             return
         if path in ("/health", "/api/health"):
             self._handle_health()
+            return
+        # Serve main site data from DB (Mongo) or file fallback — so FE never loads stale data.json directly
+        if path in ("/data.json", "/api/data"):
+            try:
+                site_data = load_site_data()
+                self._json_response(200, site_data)
+            except Exception as e:
+                self._json_response(500, {"error": "Failed to load site data", "detail": str(e)})
             return
         super().do_GET()
 

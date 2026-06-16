@@ -54,14 +54,16 @@ const BlogCore = (() => {
   async function loadData() {
     const base = getBase();
     const apiBase = getApiBase();
-    const dataBase = apiBase || base;
     const bust = Date.now();
     const fetchOpts = { cache: 'no-store' };
+    // Prefer /api/data (served from DB/Mongo when MONGO_URI set) so FE always gets fresh data
+    const dataUrl = `${apiBase || base}api/data?_=${bust}`;
+    const themesUrl = `${base}themes.json?_=${bust}`;
     const [dataRes, themesRes] = await Promise.all([
-      fetch(`${dataBase}data.json?_=${bust}`, fetchOpts),
-      fetch(`${dataBase}themes.json?_=${bust}`, fetchOpts)
+      fetch(dataUrl, fetchOpts),
+      fetch(themesUrl, fetchOpts)
     ]);
-    if (!dataRes.ok) throw new Error(`data.json HTTP ${dataRes.status}`);
+    if (!dataRes.ok) throw new Error(`Failed to load site data (api/data) HTTP ${dataRes.status}`);
     if (!themesRes.ok) throw new Error(`themes.json HTTP ${themesRes.status}`);
     data = await dataRes.json();
     themes = await themesRes.json();
