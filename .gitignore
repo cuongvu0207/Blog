@@ -38,3 +38,5 @@ tools/cloudflared.exe
 
 # Keep the start scripts committed — they are useful for anyone cloning the project
 # (the *.bat files are intentionally NOT ignored)
+
+.vercel
