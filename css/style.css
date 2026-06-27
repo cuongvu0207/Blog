@@ -508,15 +508,24 @@ body.modal-active { overflow: hidden; }
   font-weight: 500;
 }
 
-/* Page header / hero */
+/* Page header / hero — site-header already reserves nav height above */
 .header {
   padding-top: var(--header-offset);
   position: relative;
 }
 
+.site-header + .header,
+.site-header + .page-header {
+  padding-top: 20px;
+}
+
+.site-header + main.post-detail-main-top {
+  padding-top: 28px;
+}
+
 .hero-cover {
   position: absolute;
-  top: var(--toolbar-h);
+  top: 0;
   left: 0;
   right: 0;
   height: 320px;
@@ -2198,9 +2207,16 @@ body.modal-active { overflow: hidden; }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .header, .page-header,
-  .post-detail-main-top {
-    padding-top: calc(var(--site-header-h) + 12px);
+  .site-header + .header,
+  .site-header + .page-header {
+    padding-top: 12px;
+  }
+  .site-header + main.post-detail-main-top {
+    padding-top: 16px;
+  }
+  .site-header + main.auth-page,
+  .site-header + main.write-page {
+    padding-top: 16px;
   }
   .nav-unified {
     padding-left: 10px;
@@ -2484,6 +2500,11 @@ body.modal-active { overflow: hidden; }
   padding: calc(var(--site-header-h) + 24px) 20px 40px;
   position: relative;
   z-index: 1;
+}
+
+.site-header + main.auth-page,
+.site-header + main.write-page {
+  padding-top: 24px;
 }
 
 .auth-card,
