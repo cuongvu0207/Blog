@@ -50,11 +50,28 @@ const UiSelect = (() => {
 
     select.addEventListener('change', () => syncValue(state));
 
-    const observer = new MutationObserver(() => rebuild(state));
-    observer.observe(select, { childList: true, subtree: true, attributes: true, attributeFilter: ['value'] });
+    let rebuildTimer = null;
+    const observer = new MutationObserver(() => {
+      clearTimeout(rebuildTimer);
+      rebuildTimer = setTimeout(() => rebuild(state), 0);
+    });
+    observer.observe(select, { childList: true, subtree: true });
+
+    state.reposition = () => positionMenu(state);
+    window.addEventListener('resize', state.reposition, { passive: true });
+    window.addEventListener('scroll', state.reposition, { passive: true });
 
     rebuild(state);
     return state;
+  }
+
+  function positionMenu(state) {
+    if (!state.wrap.classList.contains('is-open')) return;
+    const rect = state.trigger.getBoundingClientRect();
+    const menu = state.menu;
+    menu.style.top = `${rect.bottom + 10}px`;
+    menu.style.right = `${Math.max(8, window.innerWidth - rect.right)}px`;
+    menu.style.minWidth = `${Math.max(rect.width + 40, 168)}px`;
   }
 
   function rebuild(state) {
@@ -115,7 +132,11 @@ const UiSelect = (() => {
     closeOthers(state);
     state.wrap.classList.add('is-open');
     state.trigger.setAttribute('aria-expanded', 'true');
-    requestAnimationFrame(() => state.menu.classList.add('is-visible'));
+    positionMenu(state);
+    requestAnimationFrame(() => {
+      positionMenu(state);
+      state.menu.classList.add('is-visible');
+    });
   }
 
   function close(state) {
@@ -140,7 +161,9 @@ const UiSelect = (() => {
   }
 
   function refreshAll() {
-    instances.forEach((state) => rebuild(state));
+    instances.forEach((state) => {
+      if (state.select.isConnected) rebuild(state);
+    });
   }
 
   document.addEventListener('click', () => {

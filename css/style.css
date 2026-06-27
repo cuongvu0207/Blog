@@ -125,6 +125,9 @@ body.modal-active { overflow: hidden; }
 .site-header {
   position: relative;
   z-index: 1000;
+  /* Reserve space so content is not hidden under the fixed nav */
+  min-height: var(--site-header-h);
+  pointer-events: none;
 }
 
 .nav-unified {
@@ -313,9 +316,10 @@ body.modal-active { overflow: hidden; }
 }
 
 .ui-select-menu {
-  position: absolute;
-  top: calc(100% + 10px);
+  position: fixed;
+  top: 0;
   right: 0;
+  left: auto;
   min-width: 168px;
   max-height: 280px;
   overflow-y: auto;
@@ -2206,11 +2210,8 @@ body.modal-active { overflow: hidden; }
     gap: 6px;
     padding: 6px 6px 6px 5px;
     border-radius: 14px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    overflow: visible;
   }
-  .nav-shell::-webkit-scrollbar { display: none; }
   .nav-shell > .logo {
     padding: 4px 8px 4px 4px;
     margin-right: 0;
@@ -2245,7 +2246,6 @@ body.modal-active { overflow: hidden; }
   .ui-select-chevron { width: 16px; height: 16px; }
   .ui-select-menu {
     min-width: 148px;
-    right: -4px;
   }
   .ui-select-option {
     padding: 8px 10px;

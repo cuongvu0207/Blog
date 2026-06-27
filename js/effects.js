@@ -25,11 +25,14 @@ const Effects = (() => {
   }
 
   function initToolbarHeight() {
-    const header = document.getElementById('site-header') || document.getElementById('nav');
+    // Measure the fixed nav bar itself — site-header wrapper has no in-flow height.
+    const header = document.getElementById('nav')
+      || document.getElementById('toolbar')
+      || document.querySelector('.nav-shell');
     if (!header) return;
 
     const sync = () => {
-      const h = Math.ceil(header.getBoundingClientRect().height);
+      const h = Math.max(56, Math.ceil(header.getBoundingClientRect().height));
       document.documentElement.style.setProperty('--site-header-h', `${h}px`);
       document.documentElement.style.setProperty('--toolbar-h', `${h}px`);
     };
