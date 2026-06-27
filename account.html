@@ -16,13 +16,27 @@
     <div class="grid-overlay"></div>
   </div>
 
-  <div class="toolbar" id="toolbar">
-    <div class="toolbar-right">
-      <label class="theme-label" data-i18n="toolbar.theme">Giao diện</label>
-      <select id="theme-select" class="theme-select"></select>
-      <label class="theme-label" data-i18n="toolbar.lang">Ngôn ngữ</label>
-      <select id="lang-select" class="lang-select"></select>
-      <div id="user-toolbar" class="user-toolbar"></div>
+    <header class="site-header" id="site-header">
+    <nav class="nav nav-unified nav-minimal" id="nav">
+      <div class="nav-shell" id="toolbar">
+        <a href="index.html" class="logo">
+          <span class="logo-mark" aria-hidden="true">C</span>
+          <span class="logo-text" data-field="site.title">CTECH</span>
+        </a>
+      <div class="nav-actions">
+        <div class="nav-control" data-i18n-title="toolbar.theme">
+          <span class="nav-control-icon" aria-hidden="true">🎨</span>
+          <select id="theme-select" class="theme-select nav-select" aria-label="Giao diện"></select>
+        </div>
+        <div class="nav-control" data-i18n-title="toolbar.lang">
+          <span class="nav-control-icon" aria-hidden="true">🌐</span>
+          <select id="lang-select" class="lang-select nav-select" aria-label="Ngôn ngữ"></select>
+        </div>
+        <div id="user-toolbar" class="user-toolbar"></div>
+      </div>
+      </div>
+    </nav>
+  </header>
     </div>
   </div>
 

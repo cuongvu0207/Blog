@@ -21,28 +21,33 @@
   </div>
   <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
 
-  <div class="toolbar" id="toolbar">
-    <div class="toolbar-right">
-      <label class="theme-label" data-i18n="toolbar.theme">Giao diện</label>
-      <select id="theme-select" class="theme-select"></select>
-      <label class="theme-label" data-i18n="toolbar.lang">Ngôn ngữ</label>
-      <select id="lang-select" class="lang-select"></select>
-      <div id="user-toolbar" class="user-toolbar"></div>
-    </div>
-  </div>
-
-  <nav class="nav" id="nav">
-    <a href="index.html" class="logo">
-      <span class="logo-mark" aria-hidden="true">C</span>
-      <span class="logo-text" data-field="site.title">CTECH</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="nav-link" data-i18n="nav.home">Trang chủ</a></li>
-      <li><a href="index.html#about" class="nav-link" data-i18n="nav.about">Giới thiệu</a></li>
-      <li><a href="posts.html" class="nav-link active" data-i18n="nav.blog">Đánh giá</a></li>
-      <li><a href="index.html#contact" class="nav-link" data-i18n="nav.contact">Liên hệ</a></li>
-    </ul>
-  </nav>
+    <header class="site-header" id="site-header">
+    <nav class="nav nav-unified" id="nav">
+      <div class="nav-shell" id="toolbar">
+        <a href="index.html" class="logo">
+          <span class="logo-mark" aria-hidden="true">C</span>
+          <span class="logo-text" data-field="site.title">CTECH</span>
+        </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" data-i18n="nav.home">Trang chủ</a></li>
+        <li><a href="index.html#about" class="nav-link" data-i18n="nav.about">Giới thiệu</a></li>
+        <li><a href="posts.html" class="nav-link active" data-i18n="nav.blog">Đánh giá</a></li>
+        <li><a href="index.html#contact" class="nav-link" data-i18n="nav.contact">Liên hệ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="nav-control" data-i18n-title="toolbar.theme">
+          <span class="nav-control-icon" aria-hidden="true">🎨</span>
+          <select id="theme-select" class="theme-select nav-select" aria-label="Giao diện"></select>
+        </div>
+        <div class="nav-control" data-i18n-title="toolbar.lang">
+          <span class="nav-control-icon" aria-hidden="true">🌐</span>
+          <select id="lang-select" class="lang-select nav-select" aria-label="Ngôn ngữ"></select>
+        </div>
+        <div id="user-toolbar" class="user-toolbar"></div>
+      </div>
+      </div>
+    </nav>
+  </header>
 
   <main class="post-detail-main post-detail-main-top">
     <article class="post-detail reveal" id="post-detail"></article>

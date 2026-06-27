@@ -25,17 +25,18 @@ const Effects = (() => {
   }
 
   function initToolbarHeight() {
-    const toolbar = document.getElementById('toolbar');
-    if (!toolbar) return;
+    const header = document.getElementById('site-header') || document.getElementById('nav');
+    if (!header) return;
 
     const sync = () => {
-      const h = Math.ceil(toolbar.getBoundingClientRect().height);
+      const h = Math.ceil(header.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--site-header-h', `${h}px`);
       document.documentElement.style.setProperty('--toolbar-h', `${h}px`);
     };
 
     sync();
     if (typeof ResizeObserver !== 'undefined') {
-      new ResizeObserver(sync).observe(toolbar);
+      new ResizeObserver(sync).observe(header);
     }
     window.addEventListener('resize', sync, { passive: true });
     if (document.fonts?.ready) document.fonts.ready.then(sync);
@@ -45,14 +46,14 @@ const Effects = (() => {
     const nav = document.getElementById('nav');
     if (!nav) return;
 
-    const THRESHOLD = 48;
+    const THRESHOLD = 32;
     let ticking = false;
 
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        nav.classList.toggle('nav-glass', window.scrollY > THRESHOLD);
+        nav.classList.toggle('nav-scrolled', window.scrollY > THRESHOLD);
         ticking = false;
       });
     };

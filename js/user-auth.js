@@ -190,14 +190,14 @@ const UserAuth = (() => {
     const user = getUser();
     if (!user) {
       el.innerHTML = `
-        <a href="account.html" class="toolbar-btn toolbar-link" data-i18n="user.login">Sign in</a>
-        <a href="account.html?tab=register" class="toolbar-btn toolbar-link toolbar-link-accent" data-i18n="user.register">Sign up</a>
+        <a href="account.html" class="nav-btn nav-btn-ghost toolbar-btn toolbar-link" data-i18n="user.login">Sign in</a>
+        <a href="account.html?tab=register" class="nav-btn nav-btn-primary toolbar-btn toolbar-link toolbar-link-accent" data-i18n="user.register">Sign up</a>
       `;
     } else {
       el.innerHTML = `
         <span class="user-toolbar-name">👤 ${BlogCore.escapeHtml(user.displayName)}</span>
-        <a href="write.html" class="toolbar-btn toolbar-link toolbar-link-accent" data-i18n="user.write">Write review</a>
-        <button type="button" class="toolbar-btn" id="btn-user-logout" data-i18n="user.logout">Sign out</button>
+        <a href="write.html" class="nav-btn nav-btn-primary toolbar-btn toolbar-link toolbar-link-accent" data-i18n="user.write">Write review</a>
+        <button type="button" class="nav-btn nav-btn-ghost toolbar-btn" id="btn-user-logout" data-i18n="user.logout">Sign out</button>
       `;
       document.getElementById('btn-user-logout')?.addEventListener('click', logout);
     }
