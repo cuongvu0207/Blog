@@ -133,6 +133,7 @@ const I18n = (() => {
       `<option value="${code}">${label}</option>`
     ).join('');
     select.value = lang;
+    if (typeof UiSelect !== 'undefined') UiSelect.refreshAll();
   }
 
   async function setLang(locale) {

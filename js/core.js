@@ -127,6 +127,7 @@ const BlogCore = (() => {
       if (id === current) opt.selected = true;
       select.appendChild(opt);
     });
+    if (typeof UiSelect !== 'undefined') UiSelect.refreshAll();
   }
 
   function renderSiteFields() {
@@ -355,6 +356,7 @@ const BlogCore = (() => {
     populateThemeSelect();
     renderSiteFields();
     bindPublicEvents(onRerender);
+    if (typeof UiSelect !== 'undefined') UiSelect.enhanceAll();
     if (typeof ContactBubble !== 'undefined') ContactBubble.init();
     if (typeof UserAuth !== 'undefined') UserAuth.init();
 
@@ -373,6 +375,7 @@ const BlogCore = (() => {
     await loadData();
     applyTheme(resolveTheme());
     I18n.applyDOM();
+    if (typeof UiSelect !== 'undefined') UiSelect.enhanceAll();
     if (typeof AdminAuth !== 'undefined') AdminAuth.bindLogout();
   }
 
