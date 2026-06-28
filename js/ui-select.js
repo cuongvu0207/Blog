@@ -45,9 +45,13 @@ const UiSelect = (() => {
     if (select.classList.contains('theme-select')) wrap.classList.add('ui-select--theme');
     if (select.classList.contains('lang-select')) wrap.classList.add('ui-select--lang');
 
+    const inNavControl = !!select.closest('.nav-control');
+
     const trigger = document.createElement('button');
     trigger.type = 'button';
-    trigger.className = 'ui-select-trigger';
+    trigger.className = inNavControl
+      ? 'ui-select-trigger'
+      : 'ui-select-trigger nav-btn nav-btn-ghost';
     trigger.setAttribute('aria-haspopup', 'listbox');
     trigger.setAttribute('aria-expanded', 'false');
 
@@ -75,6 +79,15 @@ const UiSelect = (() => {
       e.stopPropagation();
       toggle(state);
     });
+
+    const control = select.closest('.nav-control');
+    if (control) {
+      control.addEventListener('click', (e) => {
+        if (e.target.closest('.ui-select-trigger') || e.target.closest('.ui-select-menu')) return;
+        e.stopPropagation();
+        toggle(state);
+      });
+    }
 
     menu.addEventListener('click', (e) => {
       e.stopPropagation();

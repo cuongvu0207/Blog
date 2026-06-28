@@ -196,27 +196,42 @@ body.modal-active { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 2px 4px;
-  border-radius: 8px;
-  background: transparent;
-  border: none;
-  transition: background 0.25s;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  background: color-mix(in srgb, var(--bg) 40%, transparent);
+  color: var(--text);
+  font-size: .8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.nav-control:hover,
+.nav-control:hover {
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+  color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
 .nav-control:has(.ui-select.is-open) {
-  background: color-mix(in srgb, var(--bg-hover) 40%, transparent);
+  background: var(--gradient);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 32%, transparent);
+  transform: translateY(-1px);
 }
 
 .nav-control-icon {
-  font-size: .78rem;
+  font-size: .82rem;
   line-height: 1;
-  opacity: 0.9;
-  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.25s;
+  flex-shrink: 0;
+  opacity: 0.95;
 }
 
 .nav-control:has(.ui-select.is-open) .nav-control-icon {
-  transform: scale(1.08);
   opacity: 1;
 }
 
@@ -225,6 +240,11 @@ body.modal-active { overflow: hidden; }
   position: relative;
   display: inline-flex;
   align-items: center;
+  min-width: 0;
+}
+
+.nav-control .ui-select {
+  flex: 1;
 }
 
 .ui-select-native {
@@ -242,22 +262,48 @@ body.modal-active { overflow: hidden; }
 .ui-select-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 2px 4px 0;
+  gap: 6px;
+  padding: 0;
   border: none;
   background: transparent;
-  color: var(--text);
+  color: inherit;
   font-family: inherit;
-  font-size: .8rem;
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
   cursor: pointer;
   white-space: nowrap;
-  transition: color 0.25s, transform 0.25s;
+  transition: color 0.25s;
 }
 
-.ui-select-trigger:hover {
+.nav-control .ui-select-trigger {
+  width: 100%;
+}
+
+/* Standalone selects (admin, etc.) — full pill like nav-btn */
+.ui-select-trigger.nav-btn-ghost {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  background: color-mix(in srgb, var(--bg) 40%, transparent);
+  color: var(--text);
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.ui-select-trigger.nav-btn-ghost:hover,
+.ui-select.is-open .ui-select-trigger.nav-btn-ghost {
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
   color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.ui-select.is-open .ui-select-trigger.nav-btn-ghost {
+  background: var(--gradient);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 32%, transparent);
 }
 
 .ui-select-value {
@@ -269,39 +315,33 @@ body.modal-active { overflow: hidden; }
 .ui-select--lang .ui-select-value { max-width: 92px; }
 
 .ui-select-chevron {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, var(--bg-hover) 70%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
-  transition:
-    transform 0.35s cubic-bezier(0.32, 0.72, 0, 1),
-    background 0.25s,
-    border-color 0.25s,
-    box-shadow 0.25s;
+  background: none;
+  border: none;
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  opacity: 0.75;
 }
 
 .ui-select-chevron::before {
   content: '';
-  width: 6px;
-  height: 6px;
-  border-right: 1.5px solid var(--text-muted);
-  border-bottom: 1.5px solid var(--text-muted);
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
   transform: translateY(-1px) rotate(45deg);
-  transition: border-color 0.25s;
 }
 
 .ui-select.is-open .ui-select-chevron {
   transform: rotate(180deg);
-  background: color-mix(in srgb, var(--primary) 18%, transparent);
-  border-color: color-mix(in srgb, var(--primary) 45%, transparent);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--primary) 25%, transparent);
+  opacity: 1;
 }
 
-.ui-select.is-open .ui-select-chevron::before {
-  border-color: var(--primary);
+.nav-control:has(.ui-select.is-open) .ui-select-chevron {
+  opacity: 1;
 }
 
 .ui-select.is-changed .ui-select-trigger {
@@ -2241,10 +2281,15 @@ body.modal-active { overflow: hidden; }
     flex-shrink: 0;
   }
   .nav-control {
-    padding: 3px 5px 3px 6px;
+    padding: 6px 10px 6px 8px;
+    font-size: .74rem;
   }
-  .nav-control-icon { display: none; }
-  .ui-select-trigger { font-size: .74rem; gap: 5px; }
+  .nav-control-icon { font-size: .74rem; }
+  .ui-select-trigger { gap: 4px; }
+  .ui-select-trigger.nav-btn-ghost {
+    padding: 6px 10px;
+    font-size: .74rem;
+  }
   .ui-select-value { max-width: 68px; }
   .ui-select--lang .ui-select-value { max-width: 58px; }
   .ui-select-chevron { width: 16px; height: 16px; }
