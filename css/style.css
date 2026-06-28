@@ -125,9 +125,10 @@ body.modal-active { overflow: hidden; }
 .site-header {
   position: relative;
   z-index: 1000;
-  /* Reserve space so content is not hidden under the fixed nav */
+  /* In-flow spacer only — no bar, no background */
   min-height: var(--site-header-h);
   pointer-events: none;
+  background: transparent;
 }
 
 .nav-unified {
@@ -138,6 +139,11 @@ body.modal-active { overflow: hidden; }
   z-index: 1000;
   padding: calc(10px + var(--safe-top)) 16px 10px;
   pointer-events: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   transition: padding 0.4s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
@@ -190,23 +196,16 @@ body.modal-active { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 6px 4px 8px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--bg) 45%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border) 38%, transparent);
-  transition:
-    border-color 0.3s,
-    background 0.3s,
-    transform 0.3s,
-    box-shadow 0.3s;
+  padding: 2px 4px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  transition: background 0.25s;
 }
 
 .nav-control:hover,
 .nav-control:has(.ui-select.is-open) {
-  border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
-  background: color-mix(in srgb, var(--bg-hover) 58%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 12%, transparent),
-              0 6px 20px color-mix(in srgb, var(--primary) 14%, transparent);
+  background: color-mix(in srgb, var(--bg-hover) 40%, transparent);
 }
 
 .nav-control-icon {
@@ -528,12 +527,27 @@ body.modal-active { overflow: hidden; }
   top: 0;
   left: 0;
   right: 0;
-  height: 320px;
+  height: 300px;
   background-size: cover;
   background-position: center;
-  opacity: .4;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,.9) 0%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.9) 0%, transparent 100%);
+  opacity: .38;
+  /* Fade in below nav island — no color band behind header */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 12%,
+    rgba(0, 0, 0, 0.75) 28%,
+    rgba(0, 0, 0, 0.9) 45%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 12%,
+    rgba(0, 0, 0, 0.75) 28%,
+    rgba(0, 0, 0, 0.9) 45%,
+    transparent 100%
+  );
   pointer-events: none;
   transition: transform .1s linear;
   will-change: transform;
@@ -552,20 +566,20 @@ body.modal-active { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 14px 6px 6px;
-  border-radius: 999px;
-  margin-right: 4px;
+  padding: 4px 12px 4px 4px;
+  border-radius: 12px;
+  margin-right: 2px;
   flex-shrink: 0;
   color: var(--text);
   -webkit-text-fill-color: currentColor;
-  background: color-mix(in srgb, var(--bg) 35%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border) 35%, transparent);
+  background: transparent;
+  border: none;
   text-decoration: none;
-  transition: border-color 0.25s, transform 0.25s, background 0.25s;
+  transition: opacity 0.25s, transform 0.25s;
 }
 
 .nav-shell > .logo:hover {
-  border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+  opacity: 0.92;
   transform: translateY(-1px);
 }
 
@@ -610,7 +624,7 @@ body.modal-active { overflow: hidden; }
 }
 
 .nav-unified.nav-scrolled .nav-shell > .logo {
-  padding: 4px 10px 4px 4px;
+  padding: 2px 8px 2px 2px;
 }
 
 .logo {
@@ -2479,8 +2493,8 @@ body.modal-active { overflow: hidden; }
   gap: 6px;
   flex-shrink: 0;
   padding-left: 8px;
-  margin-left: 2px;
-  border-left: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+  margin-left: 4px;
+  border-left: 1px solid color-mix(in srgb, var(--border) 28%, transparent);
 }
 
 .user-toolbar-name {
