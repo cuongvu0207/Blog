@@ -1,6 +1,41 @@
 const UiSelect = (() => {
   const instances = new Map();
 
+  function getAnchor(state) {
+    return state.wrap.closest('.nav-control') || state.wrap;
+  }
+
+  function positionMenu(state) {
+    if (!state.wrap.classList.contains('is-open')) return;
+    const rect = getAnchor(state).getBoundingClientRect();
+    const menu = state.menu;
+    const gap = 8;
+    const minW = Math.max(rect.width, 168);
+    let left = rect.left;
+    if (left + minW > window.innerWidth - 8) {
+      left = Math.max(8, window.innerWidth - minW - 8);
+    }
+    menu.style.position = 'fixed';
+    menu.style.top = `${rect.bottom + gap}px`;
+    menu.style.left = `${left}px`;
+    menu.style.right = 'auto';
+    menu.style.width = `${minW}px`;
+    menu.style.minWidth = `${minW}px`;
+    menu.style.transformOrigin = 'top left';
+  }
+
+  function mountMenu(state) {
+    if (state.menu.parentNode !== document.body) {
+      document.body.appendChild(state.menu);
+    }
+  }
+
+  function unmountMenu(state) {
+    if (state.menu.parentNode === document.body && state.wrap.isConnected) {
+      state.wrap.appendChild(state.menu);
+    }
+  }
+
   function enhance(select) {
     if (!select || select.dataset.uiSelectEnhanced) return instances.get(select);
     select.dataset.uiSelectEnhanced = 'true';
@@ -65,15 +100,6 @@ const UiSelect = (() => {
     return state;
   }
 
-  function positionMenu(state) {
-    if (!state.wrap.classList.contains('is-open')) return;
-    const rect = state.trigger.getBoundingClientRect();
-    const menu = state.menu;
-    menu.style.top = `${rect.bottom + 10}px`;
-    menu.style.right = `${Math.max(8, window.innerWidth - rect.right)}px`;
-    menu.style.minWidth = `${Math.max(rect.width + 40, 168)}px`;
-  }
-
   function rebuild(state) {
     const { select, menu } = state;
     const current = select.value;
@@ -130,6 +156,7 @@ const UiSelect = (() => {
 
   function open(state) {
     closeOthers(state);
+    mountMenu(state);
     state.wrap.classList.add('is-open');
     state.trigger.setAttribute('aria-expanded', 'true');
     positionMenu(state);
@@ -143,6 +170,7 @@ const UiSelect = (() => {
     state.wrap.classList.remove('is-open');
     state.trigger.setAttribute('aria-expanded', 'false');
     state.menu.classList.remove('is-visible');
+    unmountMenu(state);
   }
 
   function toggle(state) {

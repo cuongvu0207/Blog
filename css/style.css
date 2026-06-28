@@ -317,9 +317,10 @@ body.modal-active { overflow: hidden; }
 .ui-select-menu {
   position: fixed;
   top: 0;
-  right: 0;
-  left: auto;
+  left: 0;
+  right: auto;
   min-width: 168px;
+  max-width: calc(100vw - 16px);
   max-height: 280px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -336,7 +337,7 @@ body.modal-active { overflow: hidden; }
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px) scale(0.96);
-  transform-origin: top right;
+  transform-origin: top left;
   transition:
     opacity 0.28s cubic-bezier(0.32, 0.72, 0, 1),
     transform 0.28s cubic-bezier(0.32, 0.72, 0, 1),
@@ -523,34 +524,7 @@ body.modal-active { overflow: hidden; }
 }
 
 .hero-cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  opacity: .38;
-  /* Fade in below nav island — no color band behind header */
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 12%,
-    rgba(0, 0, 0, 0.75) 28%,
-    rgba(0, 0, 0, 0.9) 45%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 12%,
-    rgba(0, 0, 0, 0.75) 28%,
-    rgba(0, 0, 0, 0.9) 45%,
-    transparent 100%
-  );
-  pointer-events: none;
-  transition: transform .1s linear;
-  will-change: transform;
+  display: none;
 }
 
 .editing .hero-cover {
