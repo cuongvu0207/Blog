@@ -2266,7 +2266,7 @@ body.modal-active { overflow: hidden; }
     font-size: .74rem;
   }
   .hero-name { font-size: 1.8rem; }
-  .hero-cover { height: 200px; }
+
   .section { padding: 40px 20px; }
   .about-layout { grid-template-columns: 1fr; }
   .about-photo { height: 260px; }
